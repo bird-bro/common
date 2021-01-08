@@ -1,5 +1,5 @@
 # dispose
-Eliminate more than 95% of try catch code blocks, use an elegant Assert method to verify business exceptions, 
+Eliminate more than 90% of try catch code blocks, use an elegant Assert method to verify business exceptions, 
 focus only on business logic, and not spend a lot of effort on writing redundant try catch code blocks.
 
 ### BusinessException
