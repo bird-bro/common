@@ -20,21 +20,35 @@ import java.util.Map;
 @Slf4j
 public class Assert {
 
-    public static void isBlank(String str, String message) {
-        if (StringUtils.isBlank(str)) {
-            throw new BusinessException(message);
+
+
+
+    /**
+     * 数组
+     * 是否为空
+     * @params: [obj]
+     * @author: wangpeng
+     * @since: 2021-1-8 14:41
+     */
+    public static <T> void isEmpty(T[] obj, String message, BusinessErrorCode errorCode){
+        if(null == obj || 0 == obj.length){
+            throw new BusinessException(message,errorCode);
         }
     }
-    public static void isBlank(String str, String message,String code) {
-        if (StringUtils.isBlank(str)) {
-            throw new BusinessException(message,code,"");
+    public static <T> void isEmpty(T[] obj, BusinessErrorCode errorCode){
+        if(null == obj || 0 == obj.length){
+            throw new BusinessException(errorCode);
         }
     }
-    public static void isBlank(String str, String message, String code, String info) {
-        if (StringUtils.isBlank(str)) {
-            throw new BusinessException(message,code,info);
-        }
-    }
+
+
+    /**
+     * 字符串
+     * 是否为空
+     * @params: String
+     * @author: wangpeng
+     * @since: 2021-1-8 14:41
+     */
     public static void isBlank(String str, String message, BusinessErrorCode errorCode) {
         if (StringUtils.isBlank(str)) {
             throw new BusinessException(message,errorCode);
@@ -47,27 +61,13 @@ public class Assert {
     }
 
 
-    public static void isAnyBlank(String message, String... css) {
-        if (StringUtils.isAnyBlank(css)) {
-            throw new BusinessException(message);
-        }
-    }
-
-    public static void isNull(Object object, String message) {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message);
-        }
-    }
-    public static void isNull(Object object, String message, String code) {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,"");
-        }
-    }
-    public static void isNull(Object object, String message, String code, String info) {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,info);
-        }
-    }
+    /**
+     * 对象
+     * 是否为空
+     * @params: String
+     * @author: wangpeng
+     * @since: 2021-1-8 14:41
+     */
     public static void isNull(Object object, String message, BusinessErrorCode errorCode) {
         if (ObjectUtils.isEmpty(object)) {
             throw new BusinessException(message,errorCode);
@@ -80,48 +80,15 @@ public class Assert {
     }
 
 
-    public static void isNotNull(Object object, String message) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message);
-        }
-    }
-    public static void isNotNull(Object object, String message,String code) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,"");
-        }
-    }
-    public static void isNotNull(Object object, String message,String code, String info) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,info);
-        }
-    }
-    public static void isNotNull(Object object, String message,BusinessErrorCode errorCode) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,errorCode);
-        }
-    }
-    public static void isNotNull(Object object, BusinessErrorCode errorCode) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(errorCode);
-        }
-    }
 
 
-    public static void isListOnlyOne(List<?> list, String message) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(message);
-        }
-    }
-    public static void isListOnlyOne(List<?> list, String message, String code) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(message,code);
-        }
-    }
-    public static void isListOnlyOne(List<?> list, String message, String code, String info) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(message,code,info);
-        }
-    }
+    /**
+     * List
+     * 是否为空
+     * @params: String
+     * @author: wangpeng
+     * @since: 2021-1-8 14:41
+     */
     public static void isListOnlyOne(List<?> list, String message, BusinessErrorCode errorCode) {
         if(ObjectUtils.isEmpty(list) || list.size()>1){
             throw new BusinessException(message,errorCode);
@@ -133,6 +100,28 @@ public class Assert {
         }
     }
 
+
+
+
+
+    public static void validated(BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            for (FieldError error : bindingResult.getFieldErrors()){
+                throw new BusinessException(
+                        String.format("参数：{%s}校验失败！原因：{%s}",error.getField(),error.getCode()),
+                        "A0001",
+                        error.getDefaultMessage());
+            }
+        }
+    }
+
+
+
+    public static void isAnyBlank(String message, String... css) {
+        if (StringUtils.isAnyBlank(css)) {
+            throw new BusinessException(message);
+        }
+    }
 
 
     public static boolean isNullOrEmpty(Object obj) {
@@ -165,14 +154,6 @@ public class Assert {
 
 
 
-    public static void validated(BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            for (FieldError error : bindingResult.getFieldErrors()){
-                throw new BusinessException(
-                        String.format("参数：{%s}校验失败！原因：{%s}",error.getField(),error.getCode()),
-                        "A0001",
-                        error.getDefaultMessage());
-            }
-        }
-    }
+
+
 }
