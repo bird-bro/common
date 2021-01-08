@@ -16,7 +16,7 @@ Json：
   "data": null
 }
 
-### employ
+### Instructions
 annotation the application：  @EnableGlobalDispose
 
 
