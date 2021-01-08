@@ -17,7 +17,7 @@ Json：
 }
 
 ### employ
-Annotate the Application：  @EnableGlobalDispose
+annotation the application：  @EnableGlobalDispose
 
 
 
