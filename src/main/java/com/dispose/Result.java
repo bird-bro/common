@@ -36,17 +36,17 @@ public class Result<T> implements Serializable {
 
 
     /**
-     * 错误描述
+     * 提示码
      */
     private String code;
     /**
-     * 错误描述
+     * 提示信息
      */
     private String info;
 
 
     /**
-     * 成功数据
+     * 返回数据
      */
     private T data;
 

@@ -81,7 +81,7 @@ public class GlobalDefaultExceptionHandler {
     }
 
     /**
-     * 500 异常处理
+     * 500 通用异常处理
      * Exception 类捕获
      */
     @ExceptionHandler(value = Exception.class)
