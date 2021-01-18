@@ -64,7 +64,7 @@ public class Assert {
     /**
      * 对象
      * 是否为空
-     * @params: String
+     * @params: Object
      * @author: wangpeng
      * @since: 2021-1-8 14:41
      */
@@ -85,7 +85,7 @@ public class Assert {
     /**
      * List
      * 是否为空
-     * @params: String
+     * @params: List
      * @author: wangpeng
      * @since: 2021-1-8 14:41
      */
