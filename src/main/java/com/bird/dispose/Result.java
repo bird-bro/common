@@ -1,9 +1,9 @@
-package com.dispose;
+package com.bird.dispose;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.dispose.exception.details.CommonErrorCode;
+import com.bird.dispose.exception.details.CommonErrorCode;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;

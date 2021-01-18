@@ -1,7 +1,7 @@
-package com.dispose.exception.category;
+package com.bird.dispose.exception.category;
 
-import com.dispose.exception.details.BusinessErrorCode;
-import com.dispose.exception.details.CommonErrorCode;
+import com.bird.dispose.exception.details.BusinessErrorCode;
+import com.bird.dispose.exception.details.CommonErrorCode;
 import org.springframework.http.HttpStatus;
 
 /**

@@ -1,6 +1,6 @@
-package com.dispose.annotation;
+package com.bird.dispose.annotation;
 
-import com.dispose.GlobalDefaultConfiguration;
+import com.bird.dispose.GlobalDefaultConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;

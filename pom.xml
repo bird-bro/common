@@ -9,7 +9,7 @@
         <version>2.2.7.RELEASE</version>
     </parent>
 
-    <groupId>com.rimag</groupId>
+    <groupId>com.bird</groupId>
     <artifactId>dispose</artifactId>
     <version>2.2.0</version>
     <packaging>jar</packaging>

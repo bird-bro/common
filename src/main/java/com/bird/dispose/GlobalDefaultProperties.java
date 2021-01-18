@@ -1,4 +1,4 @@
-package com.dispose;
+package com.bird.dispose;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

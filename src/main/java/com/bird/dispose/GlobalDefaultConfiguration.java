@@ -1,7 +1,7 @@
-package com.dispose;
+package com.bird.dispose;
 
-import com.dispose.exception.GlobalDefaultExceptionHandler;
-import com.dispose.advice.CommonResponseDataAdvice;
+import com.bird.dispose.exception.GlobalDefaultExceptionHandler;
+import com.bird.dispose.advice.CommonResponseDataAdvice;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

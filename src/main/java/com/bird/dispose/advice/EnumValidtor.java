@@ -1,6 +1,6 @@
-package com.dispose.advice;
+package com.bird.dispose.advice;
 
-import com.dispose.annotation.EnumValidAnnotation;
+import com.bird.dispose.annotation.EnumValidAnnotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

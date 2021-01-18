@@ -1,4 +1,4 @@
-package com.dispose.annotation;
+package com.bird.dispose.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

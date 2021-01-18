@@ -1,9 +1,9 @@
-package com.dispose.advice;
+package com.bird.dispose.advice;
 
 import com.alibaba.fastjson.JSON;
-import com.dispose.GlobalDefaultProperties;
-import com.dispose.Result;
-import com.dispose.annotation.IgnoreResponseAdvice;
+import com.bird.dispose.GlobalDefaultProperties;
+import com.bird.dispose.Result;
+import com.bird.dispose.annotation.IgnoreResponseAdvice;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

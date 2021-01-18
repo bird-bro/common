@@ -1,4 +1,4 @@
-package com.dispose.exception.details;
+package com.bird.dispose.exception.details;
 
 import org.springframework.http.HttpStatus;
 

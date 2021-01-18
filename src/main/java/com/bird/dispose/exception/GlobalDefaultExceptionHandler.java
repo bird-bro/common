@@ -1,10 +1,10 @@
-package com.dispose.exception;
+package com.bird.dispose.exception;
 
-import com.dispose.Result;
-import com.dispose.annotation.IgnoreResponseAdvice;
-import com.dispose.exception.details.CommonErrorCode;
+import com.bird.dispose.Result;
+import com.bird.dispose.annotation.IgnoreResponseAdvice;
+import com.bird.dispose.exception.details.CommonErrorCode;
 import com.netflix.client.ClientException;
-import com.dispose.exception.category.BusinessException;
+import com.bird.dispose.exception.category.BusinessException;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

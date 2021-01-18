@@ -1,7 +1,7 @@
-package com.dispose;
+package com.bird.dispose;
 
-import com.dispose.exception.details.BusinessErrorCode;
-import com.dispose.exception.category.BusinessException;
+import com.bird.dispose.exception.details.BusinessErrorCode;
+import com.bird.dispose.exception.category.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
