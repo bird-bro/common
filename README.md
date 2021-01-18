@@ -16,6 +16,10 @@ Json：
   "data": null
 }
 
+### Instructions
+annotation the application：  @EnableGlobalDispose
+
+
 
 
 
