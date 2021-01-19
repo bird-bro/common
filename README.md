@@ -1,7 +1,5 @@
 # dispose
-<img src="https://img.shields.io/badge/dispose-2.2.0-blue.svg" alt="Downloads">
-<img src="https://img.shields.io/badge/JDK-11-green.svg" alt="Downloads">
-<img src="https://img.shields.io/badge/SpringBoot-2.2.7.RELEASE-green.svg" alt="Downloads">
+<img src="https://img.shields.io/badge/dispose-2.2.0-blue.svg" alt="Downloads"> <img src="https://img.shields.io/badge/JDK-11-green.svg" alt="Downloads"> <img src="https://img.shields.io/badge/SpringBoot-2.2.7.RELEASE-green.svg" alt="Downloads">
 
 ## Description
 Eliminate more than 90% of try catch code blocks, use an elegant Assert method to verify business exceptions, 
