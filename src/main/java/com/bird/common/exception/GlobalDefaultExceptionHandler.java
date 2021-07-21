@@ -1,9 +1,9 @@
 package com.bird.common.exception;
 
 import com.bird.common.exception.advice.BusinessException;
+import com.bird.common.exception.advice.ClientException;
 import com.bird.common.exception.annotation.IgnoreResponseAdvice;
 import com.bird.common.exception.details.DefaultCode;
-import com.netflix.client.ClientException;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -56,14 +56,6 @@ public class GlobalDefaultExceptionHandler {
         outPutErrorWarn(NoHandlerFoundException.class, DefaultCode.NOT_FOUND, e);
         return Result.ofFail(DefaultCode.NOT_FOUND);
     }
-
-
-
-
-
-
-
-
 
 
 
