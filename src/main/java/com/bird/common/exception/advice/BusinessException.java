@@ -1,7 +1,7 @@
 package com.bird.common.exception.advice;
 
-import com.bird.common.exception.details.BusinessErrorCode;
-import com.bird.common.exception.details.DefaultCode;
+import com.bird.common.exception.enums.ErrorCodeEnum;
+import com.bird.common.exception.enums.DefaultCodeEnum;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -33,13 +33,13 @@ public class BusinessException extends RuntimeException {
      *
      * @param errorCode 异常枚举
      */
-    public BusinessException(BusinessErrorCode errorCode) {
+    public BusinessException(ErrorCodeEnum errorCode) {
         super(errorCode.getMessage());
         this.status = errorCode.getStatus();
         this.code = errorCode.getCode();
         this.info = errorCode.getInfo();
     }
-    public BusinessException(String message,BusinessErrorCode errorCode) {
+    public BusinessException(String message, ErrorCodeEnum errorCode) {
         super(message);
         this.status = errorCode.getStatus();
         this.code = errorCode.getCode();
@@ -51,13 +51,13 @@ public class BusinessException extends RuntimeException {
      *
      * @param errorCode 异常枚举
      */
-    public BusinessException(DefaultCode errorCode) {
+    public BusinessException(DefaultCodeEnum errorCode) {
         super(errorCode.getMessage());
         this.status = errorCode.getStatus();
         this.code = errorCode.getCode();
         this.info = errorCode.getInfo();
     }
-    public BusinessException(String message, DefaultCode errorCode) {
+    public BusinessException(String message, DefaultCodeEnum errorCode) {
         super(message);
         this.status = errorCode.getStatus();
         this.code = errorCode.getCode();

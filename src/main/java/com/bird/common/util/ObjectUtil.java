@@ -20,7 +20,7 @@ public class ObjectUtil {
      * 复制对象属性
      * @author:bird
      * @date: 2021-7-21 11:09
-     * @param:
+     * @param: source 源  target 目标
      * @return:
      **/
     public static void copyProperties(Object source,Object target) {
@@ -30,10 +30,10 @@ public class ObjectUtil {
     }
 
     /**
-     * 复制对象属性，忽略空
+     * 复制对象属性，忽略空字段
      * @author:bird
      * @date: 2021-7-21 11:08
-     * @param:
+     * @param: source 源  target 目标
      * @return:
      **/
     public static void copyPropertiesIgnoreNull(Object source, Object target){

@@ -1,4 +1,4 @@
-package com.bird.common.exception.details;
+package com.bird.common.exception.enums;
 
 import org.springframework.http.HttpStatus;
 
@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
  * @author bird
  * @date 2021-7-21 9:15
  **/
-public enum DefaultCode {
+public enum DefaultCodeEnum {
 
     /**
      * 200 处理成功。
@@ -93,7 +93,7 @@ public enum DefaultCode {
         return info;
     }
 
-    DefaultCode(int status, String message, String code, String info) {
+    DefaultCodeEnum(int status, String message, String code, String info) {
         this.status = status;
         this.message = message;
         this.code = code;

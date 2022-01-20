@@ -1,7 +1,7 @@
 package com.bird.common.exception;
 
 import com.bird.common.exception.advice.BusinessException;
-import com.bird.common.exception.details.BusinessErrorCode;
+import com.bird.common.exception.enums.ErrorCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
@@ -34,12 +34,12 @@ public class AssertException {
             throw new BusinessException(message,code,info);
         }
     }
-    public static void isNull(Object object, String message, BusinessErrorCode errorCode) {
+    public static void isNull(Object object, String message, ErrorCodeEnum errorCode) {
         if (ObjectUtils.isEmpty(object)) {
             throw new BusinessException(message,errorCode);
         }
     }
-    public static void isNull(Object object, BusinessErrorCode errorCode) {
+    public static void isNull(Object object, ErrorCodeEnum errorCode) {
         if (ObjectUtils.isEmpty(object)) {
             throw new BusinessException(errorCode);
         }
@@ -60,12 +60,12 @@ public class AssertException {
             throw new BusinessException(message,code,info);
         }
     }
-    public static void isNotNull(Object object, String message,BusinessErrorCode errorCode) {
+    public static void isNotNull(Object object, String message, ErrorCodeEnum errorCode) {
         if (!ObjectUtils.isEmpty(object)) {
             throw new BusinessException(message,errorCode);
         }
     }
-    public static void isNotNull(Object object, BusinessErrorCode errorCode) {
+    public static void isNotNull(Object object, ErrorCodeEnum errorCode) {
         if (!ObjectUtils.isEmpty(object)) {
             throw new BusinessException(errorCode);
         }
@@ -87,12 +87,12 @@ public class AssertException {
             throw new BusinessException(message,code,info);
         }
     }
-    public static void isBlank(String str, String message, BusinessErrorCode errorCode) {
+    public static void isBlank(String str, String message, ErrorCodeEnum errorCode) {
         if (StringUtils.isBlank(str)) {
             throw new BusinessException(message,errorCode);
         }
     }
-    public static void isBlank(String str, BusinessErrorCode errorCode) {
+    public static void isBlank(String str, ErrorCodeEnum errorCode) {
         if (StringUtils.isBlank(str)) {
             throw new BusinessException(errorCode);
         }
@@ -114,12 +114,12 @@ public class AssertException {
             throw new BusinessException(message,code,info);
         }
     }
-    public static void isAnyBlank(String message, BusinessErrorCode errorCode, String... css) {
+    public static void isAnyBlank(String message, ErrorCodeEnum errorCode, String... css) {
         if (StringUtils.isAnyBlank(css)) {
             throw new BusinessException(message,errorCode);
         }
     }
-    public static void isAnyBlank(BusinessErrorCode errorCode, String... css) {
+    public static void isAnyBlank(ErrorCodeEnum errorCode, String... css) {
         if (StringUtils.isAnyBlank(css)) {
             throw new BusinessException(errorCode);
         }
@@ -142,12 +142,12 @@ public class AssertException {
             throw new BusinessException(message,code,info);
         }
     }
-    public static void isListOnlyOne(List<?> list, String message, BusinessErrorCode errorCode) {
+    public static void isListOnlyOne(List<?> list, String message, ErrorCodeEnum errorCode) {
         if(ObjectUtils.isEmpty(list) || list.size()>1){
             throw new BusinessException(message,errorCode);
         }
     }
-    public static void isListOnlyOne(List<?> list, BusinessErrorCode errorCode) {
+    public static void isListOnlyOne(List<?> list, ErrorCodeEnum errorCode) {
         if(ObjectUtils.isEmpty(list) || list.size()>1){
             throw new BusinessException(errorCode);
         }
@@ -168,12 +168,12 @@ public class AssertException {
             throw new BusinessException(message,code,info);
         }
     }
-    public static void isNotListOnlyOne(List<?> list, String message, BusinessErrorCode errorCode) {
+    public static void isNotListOnlyOne(List<?> list, String message, ErrorCodeEnum errorCode) {
         if(!ObjectUtils.isEmpty(list) || list.size()<1){
             throw new BusinessException(message,errorCode);
         }
     }
-    public static void isNotListOnlyOne(List<?> list, BusinessErrorCode errorCode) {
+    public static void isNotListOnlyOne(List<?> list, ErrorCodeEnum errorCode) {
         if(!ObjectUtils.isEmpty(list) || list.size()<1){
             throw new BusinessException(errorCode);
         }

@@ -1,4 +1,4 @@
-package com.bird.common.exception.details;
+package com.bird.common.exception.enums;
 
 import org.springframework.http.HttpStatus;
 
@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
  * @author bird
  * @date 2021-7-21 9:28
  **/
-public enum BusinessErrorCode {
+public enum ErrorCodeEnum {
 
     /**
      * 通用业务异常
@@ -454,7 +454,7 @@ public enum BusinessErrorCode {
     }
 
 
-    BusinessErrorCode(int status, String message , String code, String info) {
+    ErrorCodeEnum(int status, String message , String code, String info) {
         this.status = status;
         this.info = info;
         this.code = code;

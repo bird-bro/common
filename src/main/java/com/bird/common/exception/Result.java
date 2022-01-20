@@ -3,7 +3,7 @@ package com.bird.common.exception;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.bird.common.exception.details.DefaultCode;
+import com.bird.common.exception.enums.DefaultCodeEnum;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * 统一返回
  * @author bird
  * @date 2021-7-21 8:47
  **/
@@ -109,8 +110,8 @@ public class Result<T> implements Serializable {
 
         result.status= HttpStatus.OK.value();
         result.message = HttpStatus.OK.getReasonPhrase();
-        result.code = DefaultCode.SUCCESS.getCode();
-        result.info = DefaultCode.SUCCESS.getInfo();
+        result.code = DefaultCodeEnum.SUCCESS.getCode();
+        result.info = DefaultCodeEnum.SUCCESS.getInfo();
 
         return result;
     }
@@ -120,8 +121,8 @@ public class Result<T> implements Serializable {
 
         result.status= HttpStatus.OK.value();
         result.message = HttpStatus.OK.getReasonPhrase();
-        result.code = DefaultCode.SUCCESS.getCode();
-        result.info = DefaultCode.SUCCESS.getInfo();
+        result.code = DefaultCodeEnum.SUCCESS.getCode();
+        result.info = DefaultCodeEnum.SUCCESS.getInfo();
 
         result.setData(data);
 
@@ -152,7 +153,7 @@ public class Result<T> implements Serializable {
         return result;
     }
 
-    public static Result ofFail(DefaultCode resultEnum) {
+    public static Result ofFail(DefaultCodeEnum resultEnum) {
         Result result = new Result();
 
         result.status = resultEnum.getStatus();
@@ -182,7 +183,7 @@ public class Result<T> implements Serializable {
     public String toString() {
         return "Result{" +
                 "timestamp=" + timestamp +'\'' +
-                ", status='" + code +
+                ", status='" + status +
                 ", message='" + message +
                 ", code='" + code +
                 ", info='" + info +
