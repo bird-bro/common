@@ -1,4 +1,4 @@
-package com.bird.common.util.lock;
+package com.bird.common.lock;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 

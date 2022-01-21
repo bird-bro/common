@@ -1,4 +1,4 @@
-package com.bird.common.util.redis;
+package com.bird.common.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
