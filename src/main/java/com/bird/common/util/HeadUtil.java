@@ -22,12 +22,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 获取文本
+ *
  * @author bird
  * @date 2022-1-20 10:34
  **/
 @Slf4j
-public class HttpUtil {
+public class HeadUtil {
 
     //cookies 有效期
     private static int cookie_expire = 24 * 60 * 60;
@@ -84,7 +84,7 @@ public class HttpUtil {
      * @param:
      * @return:
      **/
-    public void setCookie(String token, String userInfo, HttpServletResponse response, CookieVariable variable){
+    public static void setCookie(String token, String userInfo, HttpServletResponse response, CookieVariable variable){
         try {
             String[] domainArr = variable.getDomain().split(";");
             for (int i = 0; i < domainArr.length; i++) {
@@ -112,7 +112,7 @@ public class HttpUtil {
      * @param:
      * @return:
      **/
-    public void removeCookie (Cookie[] cookies, HttpServletResponse servletResponse, CookieVariable variable){
+    public static void removeCookie (Cookie[] cookies, HttpServletResponse servletResponse, CookieVariable variable){
         String[] domainArr = variable.getDomain().split(";");
         if (ArrayUtils.isNotEmpty(cookies) && ArrayUtils.isNotEmpty(domainArr)) {
             for (int i = 0; i < domainArr.length; i++) {
