@@ -1,26 +1,35 @@
 package com.bird.common.util;
 
 
+import com.bird.common.entity.ArchiveMessage;
+import com.bird.common.exception.DicomFileException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.io.*;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.*;
 
 /**
  * 上传
  * @author bird
  * @date 2021-9-30 8:42
  **/
+@Slf4j
 public class UploadUtil {
 
+    /**
+     * 批量上传文件
+     * @author: bird
+     * @date: 2022-4-7 15:34
+     * @param:
+     * @return:
+     **/
     public static List<String> uploadFiles(List<MultipartFile> files, String baseDir, String subDir, String directory) throws IOException {
         List<String> msgs = new ArrayList();
         if (files.size() < 1) {
@@ -84,28 +93,15 @@ public class UploadUtil {
         }
     }
 
-    public static List<String> uploadImages(List<MultipartFile> files, String baseDir, String subDir) throws Exception {
-        String directory = (new SimpleDateFormat("yyyy/MM/dd")).format(new Date());
-        File dir = new File(baseDir + subDir + directory);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
 
-        List paths = null;
 
-        try {
-            paths = uploadFiles(files, baseDir, subDir, directory + "/");
-        } catch (IOException var7) {
-            var7.printStackTrace();
-        }
-
-        if (!((String)paths.get(0)).equals("file_empty") && !((String)paths.get(0)).equals("wrong_file_extension")) {
-            return paths;
-        } else {
-            throw new Exception("上传图片时请求参数异常！");
-        }
-    }
-
+    /**
+     * 上传文件
+     * @author: bird
+     * @date: 2022-4-7 15:34
+     * @param:
+     * @return:
+     **/
     public static String uploadFile(MultipartFile file, String baseDir, String subDir, String directory) throws IOException {
         String msg = "";
         if (file != null) {
@@ -121,7 +117,6 @@ public class UploadUtil {
                     msg = "file_empty";
                     return msg;
                 }
-
                 if (!".PNG".equals(type.toUpperCase()) && !".JPG".equals(type.toUpperCase()) && !".JPEG".equals(type.toUpperCase()) && !".PDF".equals(type.toUpperCase())) {
                     msg = "wrong_file_extension";
                     return msg;
@@ -164,25 +159,11 @@ public class UploadUtil {
         }
     }
 
-    public static String uploadImage(MultipartFile file, String baseDir, String subDir) throws Exception {
-        String directory = (new SimpleDateFormat("yyyy/MM/dd")).format(new Date());
-        File dir = new File(baseDir + subDir + directory);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
 
-        String path = "";
 
-        try {
-            path = uploadFile(file, baseDir, subDir, directory + "/");
-        } catch (IOException var7) {
-            var7.printStackTrace();
-        }
 
-        if (!path.equals("file_empty") && !path.equals("wrong_file_extension") && StringUtils.isNotBlank(path)) {
-            return path;
-        } else {
-            throw new Exception("上传图片时请求参数异常！");
-        }
-    }
+
+
+
+
 }

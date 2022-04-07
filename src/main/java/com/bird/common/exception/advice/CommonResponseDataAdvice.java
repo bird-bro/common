@@ -1,9 +1,9 @@
 package com.bird.common.exception.advice;
 
 import com.alibaba.fastjson.JSON;
-import com.bird.common.exception.GlobalDefaultProperties;
+import com.bird.common.exception.global.GlobalDefaultProperties;
 import com.bird.common.exception.Result;
-import com.bird.common.exception.annotation.IgnoreResponseAdvice;
+import com.bird.common.annotation.IgnoreResponseAdvice;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

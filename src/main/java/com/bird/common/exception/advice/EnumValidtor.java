@@ -1,6 +1,6 @@
 package com.bird.common.exception.advice;
 
-import com.bird.common.exception.annotation.EnumValidAnnotation;
+import com.bird.common.annotation.EnumValidAnnotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
