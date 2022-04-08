@@ -1,7 +1,6 @@
 package com.bird.common.util;
 
 import com.alibaba.excel.EasyExcelFactory;
-import com.bird.common.tool.WaterMarkStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -37,7 +36,7 @@ public class ExcelUtil {
             EasyExcelFactory.write(response.getOutputStream(), pojoClass)
                     .autoCloseStream(true)
                     .inMemory(true)
-                    .registerWriteHandler(new WaterMarkStrategy(waterMark))
+                    .registerWriteHandler(new WaterMarkUtil(waterMark))
                     .sheet(sheetName)
                     .doWrite(list);
         }catch (Exception e){

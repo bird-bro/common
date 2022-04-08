@@ -1,4 +1,4 @@
-package com.bird.common.tool;
+package com.bird.common.util;
 
 import com.alibaba.excel.write.handler.SheetWriteHandler;
 import com.alibaba.excel.write.metadata.holder.WriteSheetHolder;
@@ -23,7 +23,7 @@ import java.io.IOException;
  * @date 2022-1-20 11:20
  **/
 @RequiredArgsConstructor
-public class WaterMarkStrategy implements SheetWriteHandler {
+public class WaterMarkUtil implements SheetWriteHandler {
 
     private final String WATER_MARK;
 
