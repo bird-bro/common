@@ -24,7 +24,7 @@ public class Result<T> implements Serializable {
     /**
      * 错误码
      */
-    private int status;
+    private int httpStatus;
     /**
      * 错误描述
      */
@@ -33,7 +33,7 @@ public class Result<T> implements Serializable {
     /**
      * 提示码
      */
-    private String code;
+    private String status;
     /**
      * 提示信息
      */
@@ -63,11 +63,11 @@ public class Result<T> implements Serializable {
     }
 
 
-    public int getStatus() {
-        return status;
+    public int getHttpStatus() {
+        return httpStatus;
     }
-    public void setStatus(int status) {
-        this.status = status;
+    public void setHttpStatus(int httpStatus) {
+        this.httpStatus = httpStatus;
     }
 
     public String getInfo() {
@@ -77,11 +77,11 @@ public class Result<T> implements Serializable {
         this.info = info;
     }
 
-    public String getCode() {
-        return code;
+    public String getStatus() {
+        return status;
     }
-    public void setCode(String code) {
-        this.code = code;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getMessage() {
@@ -95,22 +95,22 @@ public class Result<T> implements Serializable {
     public Result() {
     }
 
-    public Result(String timestamp, T data,  int status, String message, String code, String info) {
+    public Result(String timestamp, T data,  int httpStatus, String message, String status, String info) {
         this.timestamp = timestamp;
         this.data = data;
 
-        this.status = status;
+        this.httpStatus = httpStatus;
         this.info = info;
-        this.code = code;
+        this.status = status;
         this.message = message;
     }
 
     public static Result ofSuccess() {
         Result result = new Result();
 
-        result.status= HttpStatus.OK.value();
+        result.httpStatus= HttpStatus.OK.value();
         result.message = HttpStatus.OK.getReasonPhrase();
-        result.code = DefaultCodeEnum.SUCCESS.getCode();
+        result.status = DefaultCodeEnum.SUCCESS.getCode();
         result.info = DefaultCodeEnum.SUCCESS.getInfo();
 
         return result;
@@ -119,9 +119,9 @@ public class Result<T> implements Serializable {
     public static Result ofSuccess(Object data) {
         Result result = new Result();
 
-        result.status= HttpStatus.OK.value();
+        result.httpStatus= HttpStatus.OK.value();
         result.message = HttpStatus.OK.getReasonPhrase();
-        result.code = DefaultCodeEnum.SUCCESS.getCode();
+        result.status = DefaultCodeEnum.SUCCESS.getCode();
         result.info = DefaultCodeEnum.SUCCESS.getInfo();
 
         result.setData(data);
@@ -129,23 +129,23 @@ public class Result<T> implements Serializable {
         return result;
     }
 
-    public static Result ofFail(int status, String message, String code, String info) {
+    public static Result ofFail(int httpStatus, String message, String status, String info) {
         Result result = new Result();
-        result.status = status;
+        result.httpStatus = httpStatus;
         result.message = message;
 
-        result.code = code;
+        result.status = status;
         result.info = info;
 
         return result;
     }
 
-    public static Result ofFail(int status, String message, String code, String info, Object data) {
+    public static Result ofFail(int httpStatus, String message, String status, String info, Object data) {
         Result result = new Result();
 
-        result.status = status;
+        result.httpStatus = httpStatus;
         result.message = message;
-        result.code = code;
+        result.status = status;
         result.info = info;
 
         result.setData(data);
@@ -156,9 +156,9 @@ public class Result<T> implements Serializable {
     public static Result ofFail(DefaultCodeEnum resultEnum) {
         Result result = new Result();
 
-        result.status = resultEnum.getStatus();
+        result.httpStatus = resultEnum.getStatus();
         result.message = resultEnum.getMessage();
-        result.code = resultEnum.getCode();
+        result.status = resultEnum.getCode();
         result.info = resultEnum.getInfo();
         return result;
     }
@@ -170,9 +170,9 @@ public class Result<T> implements Serializable {
     public String buildResultJson() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("timestamp", this.timestamp);
-        jsonObject.put("status", this.status);
+        jsonObject.put("httpStatus", this.httpStatus);
         jsonObject.put("message", this.message);
-        jsonObject.put("code", this.code);
+        jsonObject.put("status", this.status);
         jsonObject.put("info", this.info);
 
         jsonObject.put("data", this.data);
@@ -183,9 +183,9 @@ public class Result<T> implements Serializable {
     public String toString() {
         return "Result{" +
                 "timestamp=" + timestamp +'\'' +
-                ", status='" + status +
+                ", httpStatus='" + httpStatus +
                 ", message='" + message +
-                ", code='" + code +
+                ", status='" + status +
                 ", info='" + info +
                 ", data=" + data + '\'' +
                 '}';
