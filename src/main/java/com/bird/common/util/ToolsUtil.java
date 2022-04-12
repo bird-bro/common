@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @author bird
  * @date 2021-7-21 11:07
  **/
-public class ObjectUtil {
+public class ToolsUtil {
 
     /**
      * 复制对象属性

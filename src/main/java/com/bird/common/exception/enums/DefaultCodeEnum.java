@@ -75,16 +75,16 @@ public enum DefaultCodeEnum {
     ;
 
 
-    private final int status;
-    private final String message;
+    private final int httpCode;
+    private final String httpMsg;
     private final String code;
     private final String info;
 
-    public int getStatus() {
-        return status;
+    public int getHttpCode() {
+        return httpCode;
     }
-    public String getMessage() {
-        return message;
+    public String getHttpMsg() {
+        return httpMsg;
     }
     public String getCode() {
         return code;
@@ -93,9 +93,9 @@ public enum DefaultCodeEnum {
         return info;
     }
 
-    DefaultCodeEnum(int status, String message, String code, String info) {
-        this.status = status;
-        this.message = message;
+    DefaultCodeEnum(int httpCode, String httpMsg, String code, String info) {
+        this.httpCode = httpCode;
+        this.httpMsg = httpMsg;
         this.code = code;
         this.info = info;
     }

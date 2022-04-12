@@ -422,11 +422,11 @@ public enum ErrorCodeEnum {
     /**
      * 错误码
      */
-    private final int status;
+    private final int httpCode;
     /**
      * 错误描述
      */
-    private final String message;
+    private final String httpMsg;
 
     /**
      * 提示码
@@ -440,11 +440,11 @@ public enum ErrorCodeEnum {
 
 
 
-    public int getStatus() {
-        return status;
+    public int getHttpCode() {
+        return httpCode;
     }
-    public String getMessage() {
-        return message;
+    public String getHttpMsg() {
+        return httpMsg;
     }
     public String getCode() {
         return code;
@@ -454,11 +454,11 @@ public enum ErrorCodeEnum {
     }
 
 
-    ErrorCodeEnum(int status, String message , String code, String info) {
-        this.status = status;
+    ErrorCodeEnum(int httpCode, String httpMsg , String code, String info) {
+        this.httpCode = httpCode;
         this.info = info;
         this.code = code;
-        this.message = message;
+        this.httpMsg = httpMsg;
     }
 
 }

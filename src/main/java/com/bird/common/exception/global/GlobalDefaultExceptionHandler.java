@@ -106,7 +106,7 @@ public class GlobalDefaultExceptionHandler {
     public Result handlerBusinessException(BusinessException e) throws Throwable {
         errorDispose(e);
         outPutError(BusinessException.class, DefaultCodeEnum.BUSINESS_ERROR, e);
-        return Result.ofFail(e.getStatus(),e.getMessage(),e.getCode(),e.getInfo());
+        return Result.ofFail(e.getHttpCode(),e.getMessage(),e.getCode(),e.getInfo());
     }
 
     /**
@@ -118,7 +118,7 @@ public class GlobalDefaultExceptionHandler {
         errorDispose(e);
         outPutError(HttpMessageNotReadableException.class, DefaultCodeEnum.PARAM_ERROR, e);
         String msg = String.format("%s : 错误详情( %s )", DefaultCodeEnum.PARAM_ERROR.getInfo(), e.getRootCause().getMessage());
-        return Result.ofFail(DefaultCodeEnum.PARAM_ERROR.getStatus(),msg,
+        return Result.ofFail(DefaultCodeEnum.PARAM_ERROR.getHttpCode(),msg,
                 DefaultCodeEnum.PARAM_ERROR.getCode(), DefaultCodeEnum.PARAM_ERROR.getInfo());
     }
 
@@ -140,11 +140,11 @@ public class GlobalDefaultExceptionHandler {
 
         if (constraintViolations.isEmpty()) {
             log.error("validExceptionHandler error fieldErrors is empty");
-            Result.ofFail(DefaultCodeEnum.BUSINESS_ERROR.getStatus(), "",
+            Result.ofFail(DefaultCodeEnum.BUSINESS_ERROR.getHttpCode(), "",
                     DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
         }
 
-        return Result.ofFail(DefaultCodeEnum.PARAM_ERROR.getStatus(), smg,
+        return Result.ofFail(DefaultCodeEnum.PARAM_ERROR.getHttpCode(), smg,
                 DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
     }
 
@@ -181,12 +181,12 @@ public class GlobalDefaultExceptionHandler {
 
         if (fieldErrors.isEmpty()) {
             log.error("validExceptionHandler error fieldErrors is empty");
-            Result.ofFail(DefaultCodeEnum.BUSINESS_ERROR.getStatus(), "",
+            Result.ofFail(DefaultCodeEnum.BUSINESS_ERROR.getHttpCode(), "",
                     DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
         }
 
         return Result
-                .ofFail(DefaultCodeEnum.PARAM_ERROR.getStatus(), fieldErrors.get(0).getDefaultMessage(),
+                .ofFail(DefaultCodeEnum.PARAM_ERROR.getHttpCode(), fieldErrors.get(0).getDefaultMessage(),
                         DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
     }
 
