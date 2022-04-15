@@ -3,14 +3,10 @@ package com.bird.common.exception;
 import com.bird.common.exception.advice.BusinessException;
 import com.bird.common.exception.enums.ErrorCodeEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author bird
@@ -19,54 +15,48 @@ import java.util.Map;
 @Slf4j
 public class AssertException {
 
-    public static void isNull(Object object, String message) {
+    public static void isEmpty(Object object, String message) {
         if (ObjectUtils.isEmpty(object)) {
             throw new BusinessException(message);
         }
     }
-    public static void isNull(Object object, String message, String code) {
+    public static void isEmpty(Object object, String message, String code) {
         if (ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,"");
+            throw new BusinessException(message,code);
         }
     }
-    public static void isNull(Object object, String message, String code, String info) {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,info);
-        }
-    }
-    public static void isNull(Object object, String message, ErrorCodeEnum errorCode) {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,errorCode);
-        }
-    }
-    public static void isNull(Object object, ErrorCodeEnum errorCode) {
+
+    public static void isEmpty(Object object, ErrorCodeEnum errorCode) {
         if (ObjectUtils.isEmpty(object)) {
             throw new BusinessException(errorCode);
         }
     }
 
-    public static void isNotNull(Object object, String message) {
-        if (!ObjectUtils.isEmpty(object)) {
+    public static void isEmpty(Object object, ErrorCodeEnum errorCode, String info) {
+        if (ObjectUtils.isEmpty(object)) {
+            throw new BusinessException(errorCode, info);
+        }
+    }
+
+
+    public static void isNotEmpty(Object object, String message) {
+        if (ObjectUtils.isNotEmpty(object)) {
             throw new BusinessException(message);
         }
     }
-    public static void isNotNull(Object object, String message,String code) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,"");
+    public static void isNotEmpty(Object object, String message,String code) {
+        if (ObjectUtils.isNotEmpty(object)) {
+            throw new BusinessException(message, code);
         }
     }
-    public static void isNotNull(Object object, String message,String code, String info) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,code,info);
+
+    public static void isNotEmpty(Object object, ErrorCodeEnum errorCode, String info) {
+        if (ObjectUtils.isNotEmpty(object)) {
+            throw new BusinessException(errorCode, info);
         }
     }
-    public static void isNotNull(Object object, String message, ErrorCodeEnum errorCode) {
-        if (!ObjectUtils.isEmpty(object)) {
-            throw new BusinessException(message,errorCode);
-        }
-    }
-    public static void isNotNull(Object object, ErrorCodeEnum errorCode) {
-        if (!ObjectUtils.isEmpty(object)) {
+    public static void isNotEmpty(Object object, ErrorCodeEnum errorCode) {
+        if (ObjectUtils.isNotEmpty(object)) {
             throw new BusinessException(errorCode);
         }
     }
@@ -79,17 +69,13 @@ public class AssertException {
     }
     public static void isBlank(String str, String message,String code) {
         if (StringUtils.isBlank(str)) {
-            throw new BusinessException(message,code,"");
+            throw new BusinessException(message,code);
         }
     }
-    public static void isBlank(String str, String message, String code, String info) {
+
+    public static void isBlank(String str, ErrorCodeEnum errorCode, String info) {
         if (StringUtils.isBlank(str)) {
-            throw new BusinessException(message,code,info);
-        }
-    }
-    public static void isBlank(String str, String message, ErrorCodeEnum errorCode) {
-        if (StringUtils.isBlank(str)) {
-            throw new BusinessException(message,errorCode);
+            throw new BusinessException(errorCode, info);
         }
     }
     public static void isBlank(String str, ErrorCodeEnum errorCode) {
@@ -106,17 +92,13 @@ public class AssertException {
 
     public static void isAnyBlank(String message,String code, String... css) {
         if (StringUtils.isAnyBlank(css)) {
-            throw new BusinessException(message,code,"");
+            throw new BusinessException(message,code);
         }
     }
-    public static void isAnyBlank(String message, String code, String info, String... css) {
+
+    public static void isAnyBlank(String info, ErrorCodeEnum errorCode, String... css) {
         if (StringUtils.isAnyBlank(css)) {
-            throw new BusinessException(message,code,info);
-        }
-    }
-    public static void isAnyBlank(String message, ErrorCodeEnum errorCode, String... css) {
-        if (StringUtils.isAnyBlank(css)) {
-            throw new BusinessException(message,errorCode);
+            throw new BusinessException(errorCode, info);
         }
     }
     public static void isAnyBlank(ErrorCodeEnum errorCode, String... css) {
@@ -126,96 +108,18 @@ public class AssertException {
     }
 
 
-
-    public static void isListOnlyOne(List<?> list, String message) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(message);
-        }
-    }
-    public static void isListOnlyOne(List<?> list, String message, String code) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(message,code);
-        }
-    }
-    public static void isListOnlyOne(List<?> list, String message, String code, String info) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(message,code,info);
-        }
-    }
-    public static void isListOnlyOne(List<?> list, String message, ErrorCodeEnum errorCode) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(message,errorCode);
-        }
-    }
-    public static void isListOnlyOne(List<?> list, ErrorCodeEnum errorCode) {
-        if(ObjectUtils.isEmpty(list) || list.size()>1){
-            throw new BusinessException(errorCode);
-        }
-    }
-
-    public static void isNotListOnlyOne(List<?> list, String message) {
-        if(!ObjectUtils.isEmpty(list) || list.size()<1){
-            throw new BusinessException(message);
-        }
-    }
-    public static void isNotListOnlyOne(List<?> list, String message, String code) {
-        if(!ObjectUtils.isEmpty(list) || list.size()<1){
-            throw new BusinessException(message,code);
-        }
-    }
-    public static void isNotListOnlyOne(List<?> list, String message, String code, String info) {
-        if(!ObjectUtils.isEmpty(list) || list.size()<1){
-            throw new BusinessException(message,code,info);
-        }
-    }
-    public static void isNotListOnlyOne(List<?> list, String message, ErrorCodeEnum errorCode) {
-        if(!ObjectUtils.isEmpty(list) || list.size()<1){
-            throw new BusinessException(message,errorCode);
-        }
-    }
-    public static void isNotListOnlyOne(List<?> list, ErrorCodeEnum errorCode) {
-        if(!ObjectUtils.isEmpty(list) || list.size()<1){
-            throw new BusinessException(errorCode);
-        }
-    }
-
-    public static boolean isNullOrEmpty(Object obj) {
-
-        if (obj == null) {return true;}
-
-        if (obj instanceof CharSequence) {return ((CharSequence) obj).length() == 0;}
-
-        if (obj instanceof Collection) {return ((Collection) obj).isEmpty();}
-
-        if (obj instanceof Map) {return ((Map) obj).isEmpty();}
-
-        if (obj instanceof Object[]) {
-            Object[] object = (Object[]) obj;
-            if (object.length == 0) {
-                return true;
-            }
-            boolean empty = true;
-            for (int i = 0; i < object.length; i++) {
-                if (!isNullOrEmpty(object[i])) {
-                    empty = false;
-                    break;
-                }
-            }
-            return empty;
-        }
-        return false;
-    }
-
-
-
-
+    /**
+     *
+     * @author: bird
+     * @date: 2022-4-15 8:55
+     * @param:
+     * @return:
+     **/
     public static void validated(BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             for (FieldError error : bindingResult.getFieldErrors()){
                 throw new BusinessException(
-                        String.format("--Parameter ERROR: {%s} validated failed. \n errorCode:{%s}",error.getField(),error.getCode()),
-                        "A0400",
-                        error.getDefaultMessage());
+                        String.format("--validated failed. \n errorCode: A0400"));
             }
         }
     }

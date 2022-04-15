@@ -1,18 +1,10 @@
 package com.bird.common.util;
 
 
-import com.bird.common.entity.ArchiveMessage;
-import com.bird.common.exception.DicomFileException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.*;
 
 /**

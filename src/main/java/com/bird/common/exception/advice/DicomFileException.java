@@ -1,4 +1,4 @@
-package com.bird.common.exception;
+package com.bird.common.exception.advice;
 
 
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ public class DicomFileException extends RuntimeException{
 
     private static final long serialVersionUID = 123231L;
     private String msg;
-    private int code = HttpStatus.INTERNAL_SERVER_ERROR.value();
+    private String code = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
 
     public DicomFileException(String msg) {
         super(msg);
@@ -24,13 +24,13 @@ public class DicomFileException extends RuntimeException{
         this.msg = msg;
     }
 
-    public DicomFileException(String msg, int code) {
+    public DicomFileException(String msg, String code) {
         super(msg);
         this.msg = msg;
         this.code = code;
     }
 
-    public DicomFileException(String msg, int code, Throwable e) {
+    public DicomFileException(String msg, String code, Throwable e) {
         super(msg, e);
         this.msg = msg;
         this.code = code;
@@ -44,11 +44,11 @@ public class DicomFileException extends RuntimeException{
         this.msg = msg;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

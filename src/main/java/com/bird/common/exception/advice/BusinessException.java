@@ -11,20 +11,17 @@ import org.springframework.http.HttpStatus;
  **/
 public class BusinessException extends RuntimeException {
 
-    private final int httpCode;
-    private String httpMsg;
+
     private final String code ;
-    private final String info;
+    private final String msg;
 
 
-    public int getHttpCode() {
-        return httpCode;
-    }
+
     public String getCode() {
         return code;
     }
-    public String getInfo() {
-        return info;
+    public String getMsg() {
+        return msg;
     }
 
 
@@ -34,16 +31,14 @@ public class BusinessException extends RuntimeException {
      * @param errorCode 异常枚举
      */
     public BusinessException(ErrorCodeEnum errorCode) {
-        super(errorCode.getHttpMsg());
-        this.httpCode = errorCode.getHttpCode();
+        super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
         this.code = errorCode.getCode();
-        this.info = errorCode.getInfo();
+        this.msg = errorCode.getMsg();
     }
-    public BusinessException(String message, ErrorCodeEnum errorCode) {
-        super(message);
-        this.httpCode = errorCode.getHttpCode();
+    public BusinessException(ErrorCodeEnum errorCode, String msg) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
         this.code = errorCode.getCode();
-        this.info = errorCode.getInfo();
+        this.msg = msg;
     }
 
     /**
@@ -52,54 +47,30 @@ public class BusinessException extends RuntimeException {
      * @param errorCode 异常枚举
      */
     public BusinessException(DefaultCodeEnum errorCode) {
-        super(errorCode.getHttpMsg());
-        this.httpCode = errorCode.getHttpCode();
-        this.code = errorCode.getCode();
-        this.info = errorCode.getInfo();
-    }
-    public BusinessException(String message, DefaultCodeEnum errorCode) {
-        super(message);
-        this.httpCode = errorCode.getHttpCode();
-        this.code = errorCode.getCode();
-        this.info = errorCode.getInfo();
-    }
-
-    /**
-     * 使用自定义消息
-     *
-     * @param message 值
-     * @param code 值
-     * @param info  详情
-     */
-    public BusinessException(String message, String code, String info) {
-        super(message+"-----"+info);
-
-        this.httpCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
-        this.code = code;
-        this.info = info;
+        super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        this.code = String.valueOf(errorCode.getCode());
+        this.msg = errorCode.getMsg();
     }
 
     /**
      * 使用自定义消息
      * @param code 值
-     * @param info  详情
+     * @param msg  详情
      */
-    public BusinessException(String code,String info) {
-        super("--"+HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
-        this.httpCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+    public BusinessException(String msg, String code) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
         this.code = code;
-        this.info = info;
+        this.msg = msg;
     }
 
     /**
      * 使用自定义消息
      * 通用未知异常
-     * @param info 值
+     * @param msg 值
      */
-    public BusinessException(String info) {
-        super(info);
-        this.httpCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
-        this.code = "ERROR";
-        this.info = info;
+    public BusinessException(String msg) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        this.code = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        this.msg = msg;
     }
 }

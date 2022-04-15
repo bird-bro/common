@@ -61,7 +61,7 @@ public class HeadUtil {
 
         if(StringUtils.isBlank(token)){
             log.error("-- token,为空");
-            throw new BusinessException("token is null.", ErrorCodeEnum.BUSINESS_ERROR_A0312);
+            throw new BusinessException(ErrorCodeEnum.BUSINESS_ERROR_A0312, "token is null");
         }
 
         try {

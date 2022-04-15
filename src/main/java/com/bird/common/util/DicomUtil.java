@@ -7,7 +7,7 @@ import com.bird.common.entity.sopInfo.Success;
 import com.bird.common.entity.sopInfo.Warnning;
 import com.bird.common.enums.DicomUploadEnum;
 import com.bird.common.enums.UploadEnum;
-import com.bird.common.exception.DicomFileException;
+import com.bird.common.exception.advice.DicomFileException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

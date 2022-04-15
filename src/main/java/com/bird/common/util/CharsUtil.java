@@ -1,5 +1,8 @@
 package com.bird.common.util;
 
+import cn.hutool.extra.pinyin.PinyinUtil;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +23,25 @@ public class CharsUtil {
     public static boolean isChinese(char c) {
         // 根据字节码判断
         return c >= 0x4E00 &&  c <= 0x9FA5;
+    }
+
+    /**
+     * 获取首字符简拼
+     * @author: bird
+     * @date: 2022-4-7 15:55
+     * @param:
+     * @return:
+     **/
+    public static String oneChars(String str){
+        if(StringUtils.isBlank(str)){
+            return "";
+        }
+        String first = str.substring(0, 1);
+        if(isChinese(first)){
+            return PinyinUtil.getFirstLetter(first,"");
+        }else {
+            return first;
+        }
     }
 
 

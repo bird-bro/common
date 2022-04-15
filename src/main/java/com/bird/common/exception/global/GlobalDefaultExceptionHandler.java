@@ -106,7 +106,7 @@ public class GlobalDefaultExceptionHandler {
     public Result handlerBusinessException(BusinessException e) throws Throwable {
         errorDispose(e);
         outPutError(BusinessException.class, DefaultCodeEnum.BUSINESS_ERROR, e);
-        return Result.ofFail(e.getHttpCode(),e.getMessage(),e.getCode(),e.getInfo());
+        return Result.ofFail(e.getCode(),e.getMsg(),e.getMessage());
     }
 
     /**
@@ -117,9 +117,8 @@ public class GlobalDefaultExceptionHandler {
     public Result handleHttpMessageNotReadableException(HttpMessageNotReadableException e) throws Throwable {
         errorDispose(e);
         outPutError(HttpMessageNotReadableException.class, DefaultCodeEnum.PARAM_ERROR, e);
-        String msg = String.format("%s : 错误详情( %s )", DefaultCodeEnum.PARAM_ERROR.getInfo(), e.getRootCause().getMessage());
-        return Result.ofFail(DefaultCodeEnum.PARAM_ERROR.getHttpCode(),msg,
-                DefaultCodeEnum.PARAM_ERROR.getCode(), DefaultCodeEnum.PARAM_ERROR.getInfo());
+        String msg = String.format("%s : 错误详情( %s )", e.getRootCause().getMessage());
+        return Result.ofFail(String.valueOf(DefaultCodeEnum.PARAM_ERROR.getCode()),msg);
     }
 
     /**
@@ -140,12 +139,10 @@ public class GlobalDefaultExceptionHandler {
 
         if (constraintViolations.isEmpty()) {
             log.error("validExceptionHandler error fieldErrors is empty");
-            Result.ofFail(DefaultCodeEnum.BUSINESS_ERROR.getHttpCode(), "",
-                    DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
+            Result.ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
         }
 
-        return Result.ofFail(DefaultCodeEnum.PARAM_ERROR.getHttpCode(), smg,
-                DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
+        return Result.ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
     }
 
     /**
@@ -181,13 +178,11 @@ public class GlobalDefaultExceptionHandler {
 
         if (fieldErrors.isEmpty()) {
             log.error("validExceptionHandler error fieldErrors is empty");
-            Result.ofFail(DefaultCodeEnum.BUSINESS_ERROR.getHttpCode(), "",
-                    DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
+            Result.ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
         }
 
         return Result
-                .ofFail(DefaultCodeEnum.PARAM_ERROR.getHttpCode(), fieldErrors.get(0).getDefaultMessage(),
-                        DefaultCodeEnum.BUSINESS_ERROR.getCode(), DefaultCodeEnum.BUSINESS_ERROR.getInfo());
+                .ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
     }
 
 
