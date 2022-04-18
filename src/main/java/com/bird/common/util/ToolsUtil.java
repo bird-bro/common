@@ -66,27 +66,19 @@ public class ToolsUtil {
 
 
     /**
-     * 判断一个字符是否是中文
-     * @param c 字符
-     * @return boolean
-     */
-    public static boolean isChinese(char c) {
-        // 根据字节码判断
-        return c >= 0x4E00 &&  c <= 0x9FA5;
-    }
-
-    /**
      * 判断一个字符串是否含有中文
      * @param str 字符串
      * @return boolean
      */
     public static boolean isChinese(String str) {
-        if (str == null) {return false;}
-        for (char c : str.toCharArray()) {
-            // 有一个中文字符就返回
-            if (isChinese(c)) {return true;}
+        String regEx = "[\\u4e00-\\u9fa5]+";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
 

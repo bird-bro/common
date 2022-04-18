@@ -49,7 +49,7 @@ public class PictureUtil {
      **/
     public static Color getRandomColor() {
         String[] beautifulColors =
-                new String[]{"52, 145, 250", "20, 201, 201","90, 170, 251","63, 212, 207"};
+                new String[]{"52,145,250","20,201,201","90,170,251","63,212,207"};
         int len = beautifulColors.length;
         Random random = new Random();
         String[] color = beautifulColors[random.nextInt(len)].split(",");
