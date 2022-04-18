@@ -78,7 +78,7 @@ public class PictureUtil {
         String first = name.substring(0, 1);
         String nameWritten;
         //如果用户输入的姓名少于等于3个字符，不用截取
-        if (nameLen <= 3 && ToolsUtil.isChinese(first)) {
+        if (nameLen <= 3 && CharsUtil.isChinese(first)) {
             nameWritten = name;
         } else {
             nameWritten = name.substring(0,1);
@@ -109,7 +109,7 @@ public class PictureUtil {
                 break;
             case 1:
                 //中文
-                if(ToolsUtil.isChinese(nameWritten)) {
+                if(CharsUtil.isChinese(nameWritten)) {
                     font = new Font("微软雅黑", Font.PLAIN, 130);
                     g2.setFont(font);
                     g2.drawString(nameWritten, 35, 140);

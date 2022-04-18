@@ -118,8 +118,8 @@ public class AssertException {
     public static void validated(BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             for (FieldError error : bindingResult.getFieldErrors()){
-                throw new BusinessException(
-                        String.format("--validated failed. \n errorCode: A0400"));
+                log.error(String.format("[%s %s validated failed!]",error.getField(),error.getCode()));
+                throw new BusinessException(ErrorCodeEnum.BUSINESS_ERROR_A0400, error.getDefaultMessage());
             }
         }
     }

@@ -44,36 +44,6 @@ public class Result<T> implements Serializable {
 
 
 
-//    public String getTimestamp() {
-//        return timestamp;
-//    }
-//    public void setTimestamp(String timestamp) {
-//        this.timestamp = timestamp;
-//    }
-//
-//    public T getData() {
-//        return data;
-//    }
-//    public void setData(T data) {
-//        this.data = data;
-//    }
-//
-//
-//    public int getHttpCode() {
-//        return httpCode;
-//    }
-//    public void setHttpCode(int httpCode) {
-//        this.httpCode = httpCode;
-//    }
-//
-//    public String getHttpMsg() {
-//        return httpMsg;
-//    }
-//    public void setHttpMsg(String httpMsg) {
-//        this.httpMsg = httpMsg;
-//    }
-
-
     public Result() {
     }
 

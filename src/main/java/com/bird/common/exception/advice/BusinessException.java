@@ -36,9 +36,9 @@ public class BusinessException extends RuntimeException {
         this.msg = errorCode.getMsg();
     }
     public BusinessException(ErrorCodeEnum errorCode, String msg) {
-        super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        super(msg);
         this.code = errorCode.getCode();
-        this.msg = msg;
+        this.msg = errorCode.getMsg();
     }
 
     /**
@@ -48,6 +48,12 @@ public class BusinessException extends RuntimeException {
      */
     public BusinessException(DefaultCodeEnum errorCode) {
         super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        this.code = String.valueOf(errorCode.getCode());
+        this.msg = errorCode.getMsg();
+    }
+
+    public BusinessException(DefaultCodeEnum errorCode, String msg) {
+        super(msg);
         this.code = String.valueOf(errorCode.getCode());
         this.msg = errorCode.getMsg();
     }

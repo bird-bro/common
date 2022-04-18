@@ -64,24 +64,6 @@ public class ToolsUtil {
         return emptyNames.toArray(result);
     }
 
-
-    /**
-     * 判断一个字符串是否含有中文
-     * @param str 字符串
-     * @return boolean
-     */
-    public static boolean isChinese(String str) {
-        String regEx = "[\\u4e00-\\u9fa5]+";
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(str);
-        if (m.find()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
     /**
      * 正则匹配获取数据
      * @param soap rgex
