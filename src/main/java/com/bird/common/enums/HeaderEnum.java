@@ -10,17 +10,17 @@ public enum HeaderEnum {
     /**
      * 用户UID
      */
-    LOGIN_UID("LOGIN-USER-UID", "用户UID"),
+    UID("USER-UID", "用户UID"),
 
     /**
      * 用户UID
      */
-    LOGIN_CODE("LOGIN-USER-KEY", "用户账号"),
+    ACCOUNT("USER-ACCOUNT", "用户账号"),
 
     /**
      * 用户姓名
      */
-    LOGIN_NAME( "LOGIN-USER-NAME", "用户姓名")
+    NAME( "USER-NAME", "用户姓名")
 
     ;
 

@@ -1,9 +1,12 @@
 package com.bird.common.util;
 
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.bird.common.entity.CookieVariable;
+import com.bird.common.entity.HttpRequest;
 import com.bird.common.enums.HeaderEnum;
 import com.bird.common.exception.advice.BusinessException;
 import com.bird.common.exception.enums.ErrorCodeEnum;
@@ -27,12 +30,18 @@ import java.util.Map;
  * @date 2022-1-20 10:34
  **/
 @Slf4j
-public class HeadUtil {
+public class HttpUtil {
 
     //cookies 有效期
     private static int cookie_expire = 24 * 60 * 60;
 
 
+    /**
+     * 获取HTTP请求
+     * @author: bird
+     * @date: 2022-4-20 14:04
+     * @return: HttpServletRequest
+     **/
     public static HttpServletRequest getHttpServletRequest(){
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
@@ -53,8 +62,8 @@ public class HeadUtil {
 
     /**
      * 验证Token
-     * @param token
-     * @return
+     * @param: token
+     * @return: String
      */
     public static String checkToken(String token){
         String loginCode;
@@ -75,11 +84,9 @@ public class HeadUtil {
     }
 
 
-
-
     /**
      * 写cookie 环境变量
-     * @author:bird
+     * @author: bird
      * @date: 2021-10-14 18:40
      * @param:
      * @return:
@@ -107,7 +114,7 @@ public class HeadUtil {
 
     /**
      * 删除Cookie
-     * @author:bird
+     * @author: bird
      * @date: 2021-10-14 18:41
      * @param:
      * @return:
@@ -130,34 +137,55 @@ public class HeadUtil {
     }
 
 
-    public static Integer getLoginUid(){
+    /**
+     * 获取请求头信息
+     * @author: bird
+     * @date: 2022-4-20 14:06
+     * @return: 用户ID
+     **/
+    public static Integer getUid(){
         HttpServletRequest request = getHttpServletRequest();
-        if(StringUtils.isBlank(request.getHeader(HeaderEnum.LOGIN_UID.getKey())) ){
+        if(StringUtils.isBlank(request.getHeader(HeaderEnum.UID.getKey())) ){
             return null;
         }
-        return Integer.valueOf(request.getHeader(HeaderEnum.LOGIN_UID.getKey()));
+        return Integer.valueOf(request.getHeader(HeaderEnum.UID.getKey()));
     }
 
-
-    public static String getLoginCode(){
+    /**
+     * 获取请求头信息
+     * @author: bird
+     * @date: 2022-4-20 14:06
+     * @return: 用户账号
+     **/
+    public static String getAccount(){
         HttpServletRequest request = getHttpServletRequest();
-        if(StringUtils.isBlank(request.getHeader(HeaderEnum.LOGIN_CODE.getKey())) ){
+        if(StringUtils.isBlank(request.getHeader(HeaderEnum.ACCOUNT.getKey())) ){
             return null;
         }
-        return request.getHeader(HeaderEnum.LOGIN_CODE.getKey());
+        return request.getHeader(HeaderEnum.ACCOUNT.getKey());
     }
 
-
-    public static String getLoginName(){
+    /**
+     * 获取请求头信息
+     * @author: bird
+     * @date: 2022-4-20 14:06
+     * @return: 用户姓名
+     **/
+    public static String getName(){
         HttpServletRequest request = getHttpServletRequest();
-        if(StringUtils.isBlank(request.getHeader(HeaderEnum.LOGIN_NAME.getKey())) ){
+        if(StringUtils.isBlank(request.getHeader(HeaderEnum.NAME.getKey())) ){
             return null;
         }
-        return request.getHeader(HeaderEnum.LOGIN_NAME.getKey());
+        return request.getHeader(HeaderEnum.NAME.getKey());
     }
 
-
-    public static String getIpAddr(HttpServletRequest request){
+    /**
+     * 获取请求头信息
+     * @author: bird
+     * @date: 2022-4-20 14:06
+     * @return: IP
+     **/
+    public static String getIp4(HttpServletRequest request){
         String ipAddress = null;
         try {
             ipAddress = request.getHeader("x-forwarded-for");
@@ -193,6 +221,27 @@ public class HeadUtil {
         }
         return ipAddress;
     }
+
+
+    public static HttpRequest parseRequest(HttpServletRequest request){
+
+        String ip4 = HttpUtil.getIp4(request);
+        String agent = request.getHeader("User-Agent");
+        String session = request.getSession().getId();
+        UserAgent ags = UserAgentUtil.parse(agent);
+
+        return HttpRequest.builder()
+                .session(session)
+                .ip4(ip4)
+                .browser(ags.getBrowser() + " " + ags.getVersion())
+                .engine(ags.getEngine() + " " + ags.getEngineVersion())
+                .os(ags.getOs().toString())
+                .mobile(ags.isMobile())
+                .build();
+    }
+
+
+
 
 
     public static Map<String, String> converMap(Map<String, String[]> paramMap) {
