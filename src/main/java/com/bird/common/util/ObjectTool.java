@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @author bird
  * @date 2021-7-21 11:07
  **/
-public class ToolsUtil {
+public class ObjectTool {
 
     /**
      * 复制对象属性
@@ -64,21 +64,6 @@ public class ToolsUtil {
         return emptyNames.toArray(result);
     }
 
-    /**
-     * 正则匹配获取数据
-     * @param soap rgex
-     * @return String
-     */
-    public static String getSubUtilSimple(String soap,String rgex){
-        // 匹配的模式
-        Pattern pattern = Pattern.compile(rgex);
-        Matcher m = pattern.matcher(soap);
-
-        while(m.find()){
-            return m.group(1);
-        }
-        return "";
-    }
 
 
 

@@ -14,9 +14,15 @@ import java.util.List;
  * @date 2022-1-20 11:22
  **/
 @Slf4j
-public class ExcelUtil {
+public class ExcelTool {
 
-
+    /**
+    * 导出Excel
+    * @author: birdbro
+    * @date: 2022-4-22
+    * @param:
+    * @return:
+    **/
     public static void exportExcel(List<?> list, String sheetName, Class<?> pojoClass, String fileName, String waterMark) {
         try {
             //字符编码
@@ -36,7 +42,7 @@ public class ExcelUtil {
             EasyExcelFactory.write(response.getOutputStream(), pojoClass)
                     .autoCloseStream(true)
                     .inMemory(true)
-                    .registerWriteHandler(new WaterMarkUtil(waterMark))
+                    .registerWriteHandler(new WaterMarkTool(waterMark))
                     .sheet(sheetName)
                     .doWrite(list);
         }catch (Exception e){

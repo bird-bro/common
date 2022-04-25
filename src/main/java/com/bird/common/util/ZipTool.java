@@ -17,7 +17,7 @@ import java.util.zip.ZipOutputStream;
  * @date 2022-1-20 14:20
  **/
 @Slf4j
-public class ZipUtil {
+public class ZipTool {
 
 
     /**

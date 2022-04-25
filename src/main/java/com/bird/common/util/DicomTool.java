@@ -27,7 +27,7 @@ import java.util.*;
  **/
 @Component
 @Slf4j
-public class DicomUtil {
+public class DicomTool {
 
     static boolean retry = false;
 
@@ -385,11 +385,11 @@ public class DicomUtil {
         if (retrieveURL != null && retrieveURL.size() > 0) {
             successUrl = StringUtils.isNotBlank(retrieveURL.get(0)) ? retrieveURL.get(0) : "";
         }
-        String studyUID = CharsUtil.matcher(successUrl, "studies/(.*?)/series");
+        String studyUID = CharsTool.matcher(successUrl, "studies/(.*?)/series");
         map.put("studyUid", studyUID);
-        String seriesUID = CharsUtil.matcher(successUrl, "series/(.*?)/instances");
+        String seriesUID = CharsTool.matcher(successUrl, "series/(.*?)/instances");
         map.put("seriesUid", seriesUID);
-        String sopUID = CharsUtil.matcher(successUrl, "instances/(.*?)$");
+        String sopUID = CharsTool.matcher(successUrl, "instances/(.*?)$");
         map.put("imageUid", sopUID);
         return map;
     }
@@ -409,11 +409,11 @@ public class DicomUtil {
         if (retrieveURL != null && retrieveURL.size() > 0) {
             successUrl = StringUtils.isNotBlank(retrieveURL.get(0)) ? retrieveURL.get(0) : "";
         }
-        String studyUID = CharsUtil.matcher(successUrl, "studies/(.*?)/series");
+        String studyUID = CharsTool.matcher(successUrl, "studies/(.*?)/series");
         mapUid.put("studyUID", studyUID);
-        String seriesUID = CharsUtil.matcher(successUrl, "series/(.*?)/instances");
+        String seriesUID = CharsTool.matcher(successUrl, "series/(.*?)/instances");
         mapUid.put("seriesUID", seriesUID);
-        String sopUID = CharsUtil.matcher(successUrl, "instances/(.*?)$");
+        String sopUID = CharsTool.matcher(successUrl, "instances/(.*?)$");
         mapUid.put("sopUID", sopUID);
         mapUid.put("userId", userId);
         mapUid.put("archiveUrl", archiveUrl);

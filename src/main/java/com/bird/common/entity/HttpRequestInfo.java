@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @Builder
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class HttpRequest {
+public class HttpRequestInfo {
 
     private String session;
 

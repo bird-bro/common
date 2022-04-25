@@ -29,7 +29,7 @@ import java.util.Date;
  * @date 2022-1-21 10:25
  **/
 @Slf4j
-public class RsaUtil {
+public class RsaTool {
 
     /** 算法名称 */
     private static final String ALGORITHOM = "RSA";

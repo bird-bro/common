@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * @author bird
  * @date 2022-4-7 15:52
  **/
-public class CharsUtil {
+public class CharsTool {
 
 
     /**
@@ -66,21 +66,18 @@ public class CharsUtil {
 
 
     /**
-     * 正则匹配获取数据
-     * @author: bird
-     * @date: 2022-4-7 15:56
-     * @param:
-     * @return:
-     **/
-    public static String matcher(String soap,String rgex){
-        // 匹配的模式
+    * 
+    * @author: birdbro
+    * @date: 2022-4-22 13:25 
+    * @param:
+    * @return: 
+    **/
+    public static String matcher(String soap, String rgex) {
         Pattern pattern = Pattern.compile(rgex);
         Matcher m = pattern.matcher(soap);
-        while(m.find()){
-            return m.group(1);
-        }
-        return "";
+        return m.find() ? m.group(1) : "";
     }
+
 
 
 }

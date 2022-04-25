@@ -13,7 +13,7 @@ import java.util.*;
  * @date 2021-9-30 8:42
  **/
 @Slf4j
-public class UploadUtil {
+public class UploadTool {
 
     /**
      * 批量上传文件

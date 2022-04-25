@@ -23,7 +23,7 @@ import java.io.IOException;
  * @date 2022-1-20 11:20
  **/
 @RequiredArgsConstructor
-public class WaterMarkUtil implements SheetWriteHandler {
+public class WaterMarkTool implements SheetWriteHandler {
 
     private final String WATER_MARK;
 

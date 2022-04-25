@@ -7,15 +7,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 头像
  * @author bird
  * @date 2021-7-21 11:12
  **/
-public class PictureUtil {
+public class PictureTool {
 
     /**
      * 图片做圆角处理
@@ -78,7 +76,7 @@ public class PictureUtil {
         String first = name.substring(0, 1);
         String nameWritten;
         //如果用户输入的姓名少于等于3个字符，不用截取
-        if (nameLen <= 3 && CharsUtil.isChinese(first)) {
+        if (nameLen <= 3 && CharsTool.isChinese(first)) {
             nameWritten = name;
         } else {
             nameWritten = name.substring(0,1);
@@ -92,7 +90,7 @@ public class PictureUtil {
         Graphics2D g2 = (Graphics2D) bi.getGraphics();
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setBackground(PictureUtil.getRandomColor());
+        g2.setBackground(PictureTool.getRandomColor());
         g2.clearRect(0, 0, width, height);
         g2.setPaint(Color.WHITE);
         Font font = null;
@@ -109,7 +107,7 @@ public class PictureUtil {
                 break;
             case 1:
                 //中文
-                if(CharsUtil.isChinese(nameWritten)) {
+                if(CharsTool.isChinese(nameWritten)) {
                     font = new Font("微软雅黑", Font.PLAIN, 130);
                     g2.setFont(font);
                     g2.drawString(nameWritten, 35, 140);
@@ -128,7 +126,7 @@ public class PictureUtil {
                 break;
         }
 
-        BufferedImage rounded = PictureUtil.makeRoundedCorner(bi, 99);
+        BufferedImage rounded = PictureTool.makeRoundedCorner(bi, 99);
         ImageIO.write(rounded, "png", file);
         return  pathName;
     }

@@ -11,7 +11,7 @@ import java.io.OutputStream;
  * @author bird
  * @date 2022-4-7 16:20
  **/
-public class FileUtil {
+public class FileTool {
 
     /**
      * MultipartFile 转 File

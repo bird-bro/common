@@ -6,7 +6,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.bird.common.entity.CookieVariable;
-import com.bird.common.entity.HttpRequest;
+import com.bird.common.entity.HttpRequestInfo;
 import com.bird.common.enums.HeaderEnum;
 import com.bird.common.exception.advice.BusinessException;
 import com.bird.common.exception.enums.ErrorCodeEnum;
@@ -29,8 +29,9 @@ import java.util.Map;
  * @author bird
  * @date 2022-1-20 10:34
  **/
+
 @Slf4j
-public class HttpUtil {
+public class HttpTool {
 
     //cookies 有效期
     private static int cookie_expire = 24 * 60 * 60;
@@ -223,14 +224,21 @@ public class HttpUtil {
     }
 
 
-    public static HttpRequest parseRequest(HttpServletRequest request){
+    /**
+    * 获取请求方信息
+    * @author: birdbro
+    * @date: 2022-4-22
+    * @param:
+    * @return:
+    **/
+    public static HttpRequestInfo getRequestInfo(HttpServletRequest request){
 
-        String ip4 = HttpUtil.getIp4(request);
+        String ip4 = getIp4(request);
         String agent = request.getHeader("User-Agent");
         String session = request.getSession().getId();
         UserAgent ags = UserAgentUtil.parse(agent);
 
-        return HttpRequest.builder()
+        return HttpRequestInfo.builder()
                 .session(session)
                 .ip4(ip4)
                 .browser(ags.getBrowser() + " " + ags.getVersion())
@@ -241,6 +249,20 @@ public class HttpUtil {
     }
 
 
+    /**
+     * 获取请求方 入参
+     * @author: bird
+     * @date: 2022-4-7 11:08
+     * @param:
+     * @return:
+     **/
+    public static Map<String, String> getRequestParam(Map<String, String[]> paramMap) {
+        Map<String, String> rtnMap = new HashMap<String, String>();
+        for (String key : paramMap.keySet()) {
+            rtnMap.put(key, paramMap.get(key)[0]);
+        }
+        return rtnMap;
+    }
 
 
 
