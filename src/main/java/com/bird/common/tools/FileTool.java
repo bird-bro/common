@@ -1,4 +1,4 @@
-package com.bird.common.util;
+package com.bird.common.tools;
 
 import org.springframework.web.multipart.MultipartFile;
 

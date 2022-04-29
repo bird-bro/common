@@ -1,4 +1,4 @@
-package com.bird.common.util;
+package com.bird.common.tools;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -8,8 +8,6 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 对象操作辅助

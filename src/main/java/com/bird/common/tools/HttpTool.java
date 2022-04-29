@@ -1,4 +1,4 @@
-package com.bird.common.util;
+package com.bird.common.tools;
 
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;

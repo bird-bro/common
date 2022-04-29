@@ -1,4 +1,4 @@
-package com.bird.common.util;
+package com.bird.common.tools;
 
 import cn.hutool.extra.pinyin.PinyinUtil;
 import org.apache.commons.lang3.StringUtils;

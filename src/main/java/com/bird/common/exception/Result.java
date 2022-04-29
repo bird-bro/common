@@ -1,8 +1,8 @@
 package com.bird.common.exception;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 import com.bird.common.exception.enums.DefaultCodeEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -105,7 +105,7 @@ public class Result<T> implements Serializable {
         jsonObject.put("code", this.code);
         jsonObject.put("msg", this.msg);
         jsonObject.put("data", this.data);
-        return JSON.toJSONString(jsonObject, SerializerFeature.DisableCircularReferenceDetect);
+        return JSON.toJSONString(jsonObject, JSONWriter.Feature.BeanToArray);
     }
 
     @Override

@@ -1,6 +1,7 @@
-package com.bird.common.util;
+package com.bird.common.tools;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.bird.common.entity.ArchiveMessage;
 import com.bird.common.entity.sopInfo.Failed;
 import com.bird.common.entity.sopInfo.Success;
@@ -426,7 +427,7 @@ public class DicomTool {
         map.put("studyUID", studyUID);
         map.put("seriesUID", seriesUID);
         map.put("code", DicomUploadEnum.FILE_ARC_SUCCESS.getCode());
-        map.put("message", JSONObject.toJSONString(mapUid));
+        map.put("message", JSON.toJSONString(mapUid));
         map.put("level","info");
         return map;
 
