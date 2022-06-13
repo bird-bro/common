@@ -14,5 +14,7 @@ public @interface Log {
     String value() default "";   // 操作模块
     String type() default "";   // 操作类型
     String desc() default "";  // 操作说明
+    boolean record() default false; //记录请求源
+    boolean session() default  false; //记录session
 
 }
