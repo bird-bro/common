@@ -4,7 +4,7 @@ import com.bird.common.exception.Result;
 import com.bird.common.exception.advice.BusinessException;
 import com.bird.common.exception.advice.ClientException;
 import com.bird.common.annotation.IgnoreResponseAdvice;
-import com.bird.common.exception.enums.DefaultCodeEnum;
+import com.bird.common.exception.enums.DefaultEnum;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -54,8 +54,8 @@ public class GlobalDefaultExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Result handlerNoHandlerFoundException(NoHandlerFoundException e) throws Throwable {
         errorDispose(e);
-        outPutErrorWarn(NoHandlerFoundException.class, DefaultCodeEnum.NOT_FOUND, e);
-        return Result.ofFail(DefaultCodeEnum.NOT_FOUND);
+        outPutErrorWarn(NoHandlerFoundException.class, DefaultEnum.NOT_FOUND, e);
+        return Result.ofFail(DefaultEnum.NOT_FOUND);
     }
 
 
@@ -72,8 +72,8 @@ public class GlobalDefaultExceptionHandler {
         if (cause instanceof FeignException) {
             return handlerFeignException((FeignException) cause);
         }
-        outPutError(Exception.class, DefaultCodeEnum.EXCEPTION, throwable);
-        return Result.ofFail(DefaultCodeEnum.EXCEPTION);
+        outPutError(Exception.class, DefaultEnum.EXCEPTION, throwable);
+        return Result.ofFail(DefaultEnum.EXCEPTION);
     }
 
     /**
@@ -83,8 +83,8 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(value = FeignException.class)
     public Result handlerFeignException(FeignException e) throws Throwable {
         errorDispose(e);
-        outPutError(FeignException.class, DefaultCodeEnum.RPC_ERROR, e);
-        return Result.ofFail(DefaultCodeEnum.RPC_ERROR);
+        outPutError(FeignException.class, DefaultEnum.RPC_ERROR, e);
+        return Result.ofFail(DefaultEnum.RPC_ERROR);
     }
 
     /**
@@ -94,8 +94,8 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(value = ClientException.class)
     public Result handlerClientException(ClientException e) throws Throwable {
         errorDispose(e);
-        outPutError(ClientException.class, DefaultCodeEnum.RPC_ERROR, e);
-        return Result.ofFail(DefaultCodeEnum.RPC_ERROR);
+        outPutError(ClientException.class, DefaultEnum.RPC_ERROR, e);
+        return Result.ofFail(DefaultEnum.RPC_ERROR);
     }
 
     /**
@@ -105,7 +105,7 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(value = BusinessException.class)
     public Result handlerBusinessException(BusinessException e) throws Throwable {
         errorDispose(e);
-        outPutError(BusinessException.class, DefaultCodeEnum.BUSINESS_ERROR, e);
+        outPutError(BusinessException.class, DefaultEnum.BUSINESS_ERROR, e);
         return Result.ofFail(e.getCode(),e.getMsg(),e.getMessage());
     }
 
@@ -116,9 +116,9 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Result handleHttpMessageNotReadableException(HttpMessageNotReadableException e) throws Throwable {
         errorDispose(e);
-        outPutError(HttpMessageNotReadableException.class, DefaultCodeEnum.PARAM_ERROR, e);
+        outPutError(HttpMessageNotReadableException.class, DefaultEnum.PARAM_ERROR, e);
         String msg = String.format("%s : 错误详情( %s )", e.getRootCause().getMessage());
-        return Result.ofFail(String.valueOf(DefaultCodeEnum.PARAM_ERROR.getCode()),msg);
+        return Result.ofFail(String.valueOf(DefaultEnum.PARAM_ERROR.getCode()),msg);
     }
 
     /**
@@ -139,10 +139,10 @@ public class GlobalDefaultExceptionHandler {
 
         if (constraintViolations.isEmpty()) {
             log.error("validExceptionHandler error fieldErrors is empty");
-            Result.ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
+            Result.ofFail(String.valueOf(DefaultEnum.BUSINESS_ERROR.getCode()), DefaultEnum.BUSINESS_ERROR.getMsg());
         }
 
-        return Result.ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
+        return Result.ofFail(String.valueOf(DefaultEnum.BUSINESS_ERROR.getCode()), DefaultEnum.BUSINESS_ERROR.getMsg());
     }
 
     /**
@@ -163,7 +163,7 @@ public class GlobalDefaultExceptionHandler {
     @ExceptionHandler(BindException.class)
     public Result handleBindException(BindException e) throws Throwable {
         errorDispose(e);
-        outPutError(BindException.class, DefaultCodeEnum.PARAM_ERROR, e);
+        outPutError(BindException.class, DefaultEnum.PARAM_ERROR, e);
         BindingResult bindingResult = e.getBindingResult();
         return getBindResultDTO(bindingResult);
     }
@@ -178,11 +178,11 @@ public class GlobalDefaultExceptionHandler {
 
         if (fieldErrors.isEmpty()) {
             log.error("validExceptionHandler error fieldErrors is empty");
-            Result.ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
+            Result.ofFail(String.valueOf(DefaultEnum.BUSINESS_ERROR.getCode()), DefaultEnum.BUSINESS_ERROR.getMsg());
         }
 
         return Result
-                .ofFail(String.valueOf(DefaultCodeEnum.BUSINESS_ERROR.getCode()), DefaultCodeEnum.BUSINESS_ERROR.getMsg());
+                .ofFail(String.valueOf(DefaultEnum.BUSINESS_ERROR.getCode()), DefaultEnum.BUSINESS_ERROR.getMsg());
     }
 
 

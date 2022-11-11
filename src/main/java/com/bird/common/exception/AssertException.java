@@ -2,7 +2,7 @@ package com.bird.common.exception;
 
 import cn.hutool.core.lang.Validator;
 import com.bird.common.exception.advice.BusinessException;
-import com.bird.common.exception.enums.ErrorCodeEnum;
+import com.bird.common.exception.enums.BusinessEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,13 +27,13 @@ public class AssertException {
         }
     }
 
-    public static void isEmpty(Object object, ErrorCodeEnum errorCode) {
+    public static void isEmpty(Object object, BusinessEnum errorCode) {
         if (ObjectUtils.isEmpty(object)) {
             throw new BusinessException(errorCode);
         }
     }
 
-    public static void isEmpty(Object object, ErrorCodeEnum errorCode, String info) {
+    public static void isEmpty(Object object, BusinessEnum errorCode, String info) {
         if (ObjectUtils.isEmpty(object)) {
             throw new BusinessException(errorCode, info);
         }
@@ -51,12 +51,12 @@ public class AssertException {
         }
     }
 
-    public static void isNotEmpty(Object object, ErrorCodeEnum errorCode, String info) {
+    public static void isNotEmpty(Object object, BusinessEnum errorCode, String info) {
         if (ObjectUtils.isNotEmpty(object)) {
             throw new BusinessException(errorCode, info);
         }
     }
-    public static void isNotEmpty(Object object, ErrorCodeEnum errorCode) {
+    public static void isNotEmpty(Object object, BusinessEnum errorCode) {
         if (ObjectUtils.isNotEmpty(object)) {
             throw new BusinessException(errorCode);
         }
@@ -74,12 +74,12 @@ public class AssertException {
         }
     }
 
-    public static void isBlank(String str, ErrorCodeEnum errorCode, String info) {
+    public static void isBlank(String str, BusinessEnum errorCode, String info) {
         if (StringUtils.isBlank(str)) {
             throw new BusinessException(errorCode, info);
         }
     }
-    public static void isBlank(String str, ErrorCodeEnum errorCode) {
+    public static void isBlank(String str, BusinessEnum errorCode) {
         if (StringUtils.isBlank(str)) {
             throw new BusinessException(errorCode);
         }
@@ -97,12 +97,12 @@ public class AssertException {
         }
     }
 
-    public static void isAnyBlank(String info, ErrorCodeEnum errorCode, String... css) {
+    public static void isAnyBlank(String info, BusinessEnum errorCode, String... css) {
         if (StringUtils.isAnyBlank(css)) {
             throw new BusinessException(errorCode, info);
         }
     }
-    public static void isAnyBlank(ErrorCodeEnum errorCode, String... css) {
+    public static void isAnyBlank(BusinessEnum errorCode, String... css) {
         if (StringUtils.isAnyBlank(css)) {
             throw new BusinessException(errorCode);
         }
@@ -120,12 +120,12 @@ public class AssertException {
         }
     }
 
-    public static void isEmail(String email, ErrorCodeEnum errorCode, String info) {
+    public static void isEmail(String email, BusinessEnum errorCode, String info) {
         if (Validator.isEmail(email)) {
             throw new BusinessException(errorCode, info);
         }
     }
-    public static void isEmail(String email, ErrorCodeEnum errorCode) {
+    public static void isEmail(String email, BusinessEnum errorCode) {
         if (Validator.isEmail(email)) {
             throw new BusinessException(errorCode);
         }
@@ -141,12 +141,12 @@ public class AssertException {
             throw new BusinessException(message,code);
         }
     }
-    public static void isPhone(String phone, ErrorCodeEnum errorCode, String info) {
+    public static void isPhone(String phone, BusinessEnum errorCode, String info) {
         if (Validator.isMobile(phone)) {
             throw new BusinessException(errorCode, info);
         }
     }
-    public static void isPhone(String phone, ErrorCodeEnum errorCode) {
+    public static void isPhone(String phone, BusinessEnum errorCode) {
         if (Validator.isMobile(phone)) {
             throw new BusinessException(errorCode);
         }
@@ -164,7 +164,7 @@ public class AssertException {
         if(bindingResult.hasErrors()){
             for (FieldError error : bindingResult.getFieldErrors()){
                 log.error(String.format("[%s %s validated failed!]",error.getField(),error.getCode()));
-                throw new BusinessException(ErrorCodeEnum.BUSINESS_ERROR_A0400, error.getDefaultMessage());
+                throw new BusinessException(BusinessEnum.ERROR_A0400, error.getDefaultMessage());
             }
         }
     }

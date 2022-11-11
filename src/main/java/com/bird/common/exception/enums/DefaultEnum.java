@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
  * @date 2021-7-21 9:15
  **/
 @Getter
-public enum DefaultCodeEnum {
+public enum DefaultEnum {
+
 
     /**
      * 200 处理成功。
@@ -70,7 +71,7 @@ public enum DefaultCodeEnum {
 
     private final String msg;
 
-    DefaultCodeEnum(int code, String msg) {
+    DefaultEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }

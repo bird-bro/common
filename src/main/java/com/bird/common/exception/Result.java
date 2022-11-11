@@ -3,10 +3,10 @@ package com.bird.common.exception;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.JSONWriter;
-import com.bird.common.exception.enums.DefaultCodeEnum;
+import com.bird.common.exception.enums.BusinessEnum;
+import com.bird.common.exception.enums.DefaultEnum;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -57,16 +57,16 @@ public class Result<T> implements Serializable {
     public static Result ofSuccess() {
         Result result = new Result();
 
-        result.code= String.valueOf(HttpStatus.OK.value());
-        result.msg = HttpStatus.OK.getReasonPhrase();
+        result.code= BusinessEnum.SUCCESS.getCode();
+        result.msg = BusinessEnum.SUCCESS.getMsg();
         return result;
     }
 
     public static Result ofSuccess(Object data) {
         Result result = new Result();
 
-        result.code= String.valueOf(HttpStatus.OK.value());
-        result.msg = HttpStatus.OK.getReasonPhrase();
+        result.code= BusinessEnum.SUCCESS.getCode();
+        result.msg = BusinessEnum.SUCCESS.getMsg();
         result.setData(data);
 
         return result;
@@ -88,7 +88,7 @@ public class Result<T> implements Serializable {
         return result;
     }
 
-    public static Result ofFail(DefaultCodeEnum resultEnum) {
+    public static Result ofFail(DefaultEnum resultEnum) {
         Result result = new Result();
         result.code = String.valueOf(resultEnum.getCode());
         result.msg = resultEnum.getMsg();

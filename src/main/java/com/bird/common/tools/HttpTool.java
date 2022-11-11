@@ -9,7 +9,7 @@ import com.bird.common.entity.CookieVariable;
 import com.bird.common.entity.HttpRequestInfo;
 import com.bird.common.enums.HeaderEnum;
 import com.bird.common.exception.advice.BusinessException;
-import com.bird.common.exception.enums.ErrorCodeEnum;
+import com.bird.common.exception.enums.BusinessEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -71,14 +71,14 @@ public class HttpTool {
 
         if(StringUtils.isBlank(token)){
             log.error("-- token,为空");
-            throw new BusinessException(ErrorCodeEnum.BUSINESS_ERROR_A0312, "token is null");
+            throw new BusinessException(BusinessEnum.ERROR_A0312, "token is null");
         }
 
         try {
             loginCode = JWT.decode(token).getAudience().get(0);
         }catch (JWTDecodeException e){
             log.error("-- token,解析失败");
-            throw new BusinessException(ErrorCodeEnum.BUSINESS_ERROR_A0340);
+            throw new BusinessException(BusinessEnum.ERROR_A0340);
         }
 
         return loginCode;

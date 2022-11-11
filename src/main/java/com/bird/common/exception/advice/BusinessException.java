@@ -1,7 +1,7 @@
 package com.bird.common.exception.advice;
 
-import com.bird.common.exception.enums.ErrorCodeEnum;
-import com.bird.common.exception.enums.DefaultCodeEnum;
+import com.bird.common.exception.enums.BusinessEnum;
+import com.bird.common.exception.enums.DefaultEnum;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -30,12 +30,12 @@ public class BusinessException extends RuntimeException {
      *
      * @param errorCode 异常枚举
      */
-    public BusinessException(ErrorCodeEnum errorCode) {
+    public BusinessException(BusinessEnum errorCode) {
         super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
         this.code = errorCode.getCode();
         this.msg = errorCode.getMsg();
     }
-    public BusinessException(ErrorCodeEnum errorCode, String msg) {
+    public BusinessException(BusinessEnum errorCode, String msg) {
         super(msg);
         this.code = errorCode.getCode();
         this.msg = errorCode.getMsg();
@@ -46,13 +46,13 @@ public class BusinessException extends RuntimeException {
      *
      * @param errorCode 异常枚举
      */
-    public BusinessException(DefaultCodeEnum errorCode) {
+    public BusinessException(DefaultEnum errorCode) {
         super(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
         this.code = String.valueOf(errorCode.getCode());
         this.msg = errorCode.getMsg();
     }
 
-    public BusinessException(DefaultCodeEnum errorCode, String msg) {
+    public BusinessException(DefaultEnum errorCode, String msg) {
         super(msg);
         this.code = String.valueOf(errorCode.getCode());
         this.msg = errorCode.getMsg();
