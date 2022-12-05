@@ -2,7 +2,7 @@ package com.bird.common.exception;
 
 import cn.hutool.core.lang.Validator;
 import com.bird.common.exception.advice.BusinessException;
-import com.bird.common.exception.enums.BusinessEnum;
+import com.bird.common.enums.BusinessEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

@@ -1,7 +1,7 @@
 package com.bird.common.exception.advice;
 
-import com.bird.common.exception.enums.BusinessEnum;
-import com.bird.common.exception.enums.DefaultEnum;
+import com.bird.common.enums.BusinessEnum;
+import com.bird.common.enums.DefaultEnum;
 import org.springframework.http.HttpStatus;
 
 /**

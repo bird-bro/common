@@ -1,4 +1,4 @@
-package com.bird.common.exception.enums;
+package com.bird.common.enums;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,9 @@ public enum DefaultEnum {
     SUCCESS(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),
 
 
+    /**
+     * 204 请求已经执行成功，但没有内容。
+     */
     NO_CONTENT(HttpStatus.NO_CONTENT.value(),HttpStatus.NO_CONTENT.getReasonPhrase()),
 
     /**

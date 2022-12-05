@@ -1,4 +1,4 @@
-package com.bird.common.exception.enums;
+package com.bird.common.enums;
 
 import lombok.Getter;
 

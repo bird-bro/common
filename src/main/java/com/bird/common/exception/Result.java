@@ -3,8 +3,8 @@ package com.bird.common.exception;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.alibaba.fastjson2.JSONWriter;
-import com.bird.common.exception.enums.BusinessEnum;
-import com.bird.common.exception.enums.DefaultEnum;
+import com.bird.common.enums.BusinessEnum;
+import com.bird.common.enums.DefaultEnum;
 import lombok.Getter;
 import lombok.Setter;
 

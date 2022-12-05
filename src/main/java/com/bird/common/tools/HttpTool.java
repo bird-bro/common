@@ -9,7 +9,7 @@ import com.bird.common.entity.CookieVariable;
 import com.bird.common.entity.HttpRequestInfo;
 import com.bird.common.enums.HeaderEnum;
 import com.bird.common.exception.advice.BusinessException;
-import com.bird.common.exception.enums.BusinessEnum;
+import com.bird.common.enums.BusinessEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;

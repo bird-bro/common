@@ -4,7 +4,7 @@ import com.bird.common.exception.Result;
 import com.bird.common.exception.advice.BusinessException;
 import com.bird.common.exception.advice.ClientException;
 import com.bird.common.annotation.IgnoreResponseAdvice;
-import com.bird.common.exception.enums.DefaultEnum;
+import com.bird.common.enums.DefaultEnum;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
