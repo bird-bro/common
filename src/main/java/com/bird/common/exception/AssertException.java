@@ -1,6 +1,5 @@
 package com.bird.common.exception;
 
-import cn.hutool.core.lang.Validator;
 import com.bird.common.exception.advice.BusinessException;
 import com.bird.common.enums.BusinessEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -104,50 +103,6 @@ public class AssertException {
     }
     public static void isAnyBlank(BusinessEnum errorCode, String... css) {
         if (StringUtils.isAnyBlank(css)) {
-            throw new BusinessException(errorCode);
-        }
-    }
-
-
-    public static void isEmail(String email, String message) {
-        if (Validator.isEmail(email)) {
-            throw new BusinessException(message);
-        }
-    }
-    public static void isEmail(String email, String message,String code) {
-        if (Validator.isEmail(email)) {
-            throw new BusinessException(message,code);
-        }
-    }
-
-    public static void isEmail(String email, BusinessEnum errorCode, String info) {
-        if (Validator.isEmail(email)) {
-            throw new BusinessException(errorCode, info);
-        }
-    }
-    public static void isEmail(String email, BusinessEnum errorCode) {
-        if (Validator.isEmail(email)) {
-            throw new BusinessException(errorCode);
-        }
-    }
-
-    public static void isPhone(String phone, String message) {
-        if (Validator.isMobile(phone)) {
-            throw new BusinessException(message);
-        }
-    }
-    public static void isPhone(String phone, String message,String code) {
-        if (Validator.isMobile(phone)) {
-            throw new BusinessException(message,code);
-        }
-    }
-    public static void isPhone(String phone, BusinessEnum errorCode, String info) {
-        if (Validator.isMobile(phone)) {
-            throw new BusinessException(errorCode, info);
-        }
-    }
-    public static void isPhone(String phone, BusinessEnum errorCode) {
-        if (Validator.isMobile(phone)) {
             throw new BusinessException(errorCode);
         }
     }
