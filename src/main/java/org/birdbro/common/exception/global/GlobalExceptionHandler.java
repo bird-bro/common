@@ -6,13 +6,6 @@
 package org.birdbro.common.exception.global;
 
 import feign.FeignException;
-import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import org.birdbro.common.annotation.IgnoreResponseAdvice;
 import org.birdbro.common.enums.HttpStatusEnum;
 import org.birdbro.common.exception.BusinessException;
@@ -34,6 +27,14 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -59,9 +60,9 @@ public class GlobalExceptionHandler {
     private Result ifDepthExceptionType(Throwable throwable) throws Throwable {
         Throwable cause = throwable.getCause();
         if (cause instanceof FeignException) {
-            return this.handlerFeignException((FeignException)cause);
+            return this.handlerFeignException((FeignException) cause);
         } else if (cause instanceof BusinessException) {
-            return this.handlerBusinessException((BusinessException)cause);
+            return this.handlerBusinessException((BusinessException) cause);
         } else {
             this.outPutError(Exception.class, HttpStatusEnum.EXCEPTION, throwable);
             return Result.ofFail(HttpStatusEnum.EXCEPTION);
@@ -104,8 +105,8 @@ public class GlobalExceptionHandler {
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
         ConstraintViolation error;
         if (log.isDebugEnabled()) {
-            for(Iterator var4 = constraintViolations.iterator(); var4.hasNext(); smg = error.getMessageTemplate()) {
-                error = (ConstraintViolation)var4.next();
+            for (Iterator var4 = constraintViolations.iterator(); var4.hasNext(); smg = error.getMessageTemplate()) {
+                error = (ConstraintViolation) var4.next();
                 log.error("{} -> {}", error.getPropertyPath(), error.getMessageTemplate());
             }
         }
@@ -127,9 +128,10 @@ public class GlobalExceptionHandler {
             if (errors != null) {
                 StringBuilder finalStringBuilder = stringBuilder;
                 errors.forEach((p) -> {
-                    FieldError fieldError = (FieldError)p;
+                    FieldError fieldError = (FieldError) p;
+
                     log.warn("Bad Request Parameters: dto entity [{}],field [{}],message [{}]", new Object[]{fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage()});
-                    finalStringBuilder.append(String.format("%s[%s]%s", p.getObjectName(), ((FieldError)p).getField(), p.getDefaultMessage())).append("，");
+                    finalStringBuilder.append(String.format("[%s]: %s", ((FieldError) p).getField(), p.getDefaultMessage())).append("，");
                 });
             }
 
@@ -154,8 +156,8 @@ public class GlobalExceptionHandler {
         if (log.isDebugEnabled()) {
             Iterator var3 = fieldErrors.iterator();
 
-            while(var3.hasNext()) {
-                FieldError error = (FieldError)var3.next();
+            while (var3.hasNext()) {
+                FieldError error = (FieldError) var3.next();
                 log.error("{} -> {}", error.getDefaultMessage(), error.getDefaultMessage());
             }
         }
@@ -169,17 +171,17 @@ public class GlobalExceptionHandler {
     }
 
     private <T extends Throwable> void errorDispose(T e) throws Throwable {
-        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-        HandlerMethod handlerMethod = (HandlerMethod)request.getAttribute("org.springframework.web.servlet.HandlerMapping.bestMatchingHandler");
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HandlerMethod handlerMethod = (HandlerMethod) request.getAttribute("org.springframework.web.servlet.HandlerMapping.bestMatchingHandler");
         Class<?> beanType = handlerMethod.getBeanType();
         Method method = handlerMethod.getMethod();
-        IgnoreResponseAdvice methodAnnotation = (IgnoreResponseAdvice)method.getAnnotation(IgnoreResponseAdvice.class);
+        IgnoreResponseAdvice methodAnnotation = (IgnoreResponseAdvice) method.getAnnotation(IgnoreResponseAdvice.class);
         if (methodAnnotation != null) {
             if (!methodAnnotation.errorDispose()) {
                 throw e;
             }
         } else {
-            IgnoreResponseAdvice classAnnotation = (IgnoreResponseAdvice)beanType.getAnnotation(IgnoreResponseAdvice.class);
+            IgnoreResponseAdvice classAnnotation = (IgnoreResponseAdvice) beanType.getAnnotation(IgnoreResponseAdvice.class);
             if (classAnnotation != null && !classAnnotation.errorDispose()) {
                 throw e;
             }
@@ -187,14 +189,14 @@ public class GlobalExceptionHandler {
     }
 
     public void outPutError(Class errorType, Enum secondaryErrorType, Throwable throwable) {
-        log.error("-------------------Error throw（开始）---------------------");
+        log.error("-------------------Error throw begin---------------------");
         log.error("[{}] {}: {}", new Object[]{errorType.getSimpleName(), secondaryErrorType, throwable.getMessage(), throwable});
-        log.error("-------------------Error throw（结束）---------------------");
+        log.error("-------------------Error throw end---------------------");
     }
 
     public void outPutWarn(Class errorType, Enum secondaryErrorType, Throwable throwable) {
-        log.warn("-------------------Warn throw（开始）---------------------");
+        log.warn("-------------------Warn throw begin---------------------");
         log.warn("[{}] {}: {}", new Object[]{errorType.getSimpleName(), secondaryErrorType, throwable.getMessage()});
-        log.warn("-------------------Warn throw（结束）---------------------");
+        log.warn("-------------------Warn throw end---------------------");
     }
 }

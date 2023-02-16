@@ -5,14 +5,14 @@ import cn.hutool.http.useragent.UserAgentUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.birdbro.common.entity.CookieVariable;
 import org.birdbro.common.entity.HttpRequestInfo;
 import org.birdbro.common.enums.ExceptionEnum;
 import org.birdbro.common.enums.HeaderEnum;
 import org.birdbro.common.exception.BusinessException;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -26,6 +26,7 @@ import java.util.Map;
 
 /**
  * HTTP请求
+ *
  * @author birdbro
  * @date 9:41 2022-12-7
  **/
@@ -38,22 +39,24 @@ public class HttpTool {
 
     /**
      * 获取HTTP请求
+     *
      * @author: bird
      * @date: 2022-4-20 14:04
      * @return: HttpServletRequest
      **/
-    public static HttpServletRequest getHttpServletRequest(){
+    public static HttpServletRequest getHttpServletRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
 
     /**
      * 生成 Token
-     * @param code 账号
-     * @param password  密码
+     *
+     * @param code     账号
+     * @param password 密码
      * @return token
      */
-    public static String getToken(String code, String password){
+    public static String getToken(String code, String password) {
         String token = "";
         token = JWT.create().withAudience(code).sign(Algorithm.HMAC256(password));
         return token;
@@ -62,20 +65,21 @@ public class HttpTool {
 
     /**
      * 验证Token
+     *
      * @param: token
      * @return: String
      */
-    public static String checkToken(String token){
+    public static String checkToken(String token) {
         String loginCode;
 
-        if(StringUtils.isBlank(token)){
+        if (StringUtils.isBlank(token)) {
             log.error("-- token,为空");
             throw new BusinessException(ExceptionEnum.ERROR_A0312, "token is null");
         }
 
         try {
             loginCode = JWT.decode(token).getAudience().get(0);
-        }catch (JWTDecodeException e){
+        } catch (JWTDecodeException e) {
             log.error("-- token,解析失败");
             throw new BusinessException(ExceptionEnum.ERROR_A0340);
         }
@@ -86,16 +90,17 @@ public class HttpTool {
 
     /**
      * 写cookie 环境变量
+     *
      * @author: bird
      * @date: 2021-10-14 18:40
      * @param:
      * @return:
      **/
-    public static void setCookie(String token, String userInfo, HttpServletResponse response, CookieVariable variable){
+    public static void setCookie(String token, String userInfo, HttpServletResponse response, CookieVariable variable) {
         try {
             String[] domainArr = variable.getDomain().split(";");
             for (int i = 0; i < domainArr.length; i++) {
-                Cookie cookie = new Cookie(variable.getHeader() + "-" + variable.getEnv(), token );
+                Cookie cookie = new Cookie(variable.getHeader() + "-" + variable.getEnv(), token);
                 cookie.setMaxAge(cookie_expire);
                 cookie.setDomain(domainArr[i]);
                 cookie.setPath("/");
@@ -106,7 +111,7 @@ public class HttpTool {
                 cookie.setPath("/");
                 response.addCookie(cookie);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error("- cookie 写入失败", e);
         }
     }
@@ -114,12 +119,13 @@ public class HttpTool {
 
     /**
      * 删除Cookie
+     *
      * @author: bird
      * @date: 2021-10-14 18:41
      * @param:
      * @return:
      **/
-    public static void removeCookie (Cookie[] cookies, HttpServletResponse servletResponse, CookieVariable variable){
+    public static void removeCookie(Cookie[] cookies, HttpServletResponse servletResponse, CookieVariable variable) {
         String[] domainArr = variable.getDomain().split(";");
         if (ArrayUtils.isNotEmpty(cookies) && ArrayUtils.isNotEmpty(domainArr)) {
             for (int i = 0; i < domainArr.length; i++) {
@@ -139,13 +145,14 @@ public class HttpTool {
 
     /**
      * 获取请求头信息
+     *
      * @author: bird
      * @date: 2022-4-20 14:06
      * @return: 用户ID
      **/
-    public static Integer getUid(){
+    public static Integer getUid() {
         HttpServletRequest request = getHttpServletRequest();
-        if(StringUtils.isBlank(request.getHeader(HeaderEnum.UID.getKey())) ){
+        if (StringUtils.isBlank(request.getHeader(HeaderEnum.UID.getKey()))) {
             return null;
         }
         return Integer.valueOf(request.getHeader(HeaderEnum.UID.getKey()));
@@ -153,13 +160,14 @@ public class HttpTool {
 
     /**
      * 获取请求头信息
+     *
      * @author: bird
      * @date: 2022-4-20 14:06
      * @return: 用户账号
      **/
-    public static String getAccount(){
+    public static String getAccount() {
         HttpServletRequest request = getHttpServletRequest();
-        if(StringUtils.isBlank(request.getHeader(HeaderEnum.ACCOUNT.getKey())) ){
+        if (StringUtils.isBlank(request.getHeader(HeaderEnum.ACCOUNT.getKey()))) {
             return null;
         }
         return request.getHeader(HeaderEnum.ACCOUNT.getKey());
@@ -167,13 +175,14 @@ public class HttpTool {
 
     /**
      * 获取请求头信息
+     *
      * @author: bird
      * @date: 2022-4-20 14:06
      * @return: 用户姓名
      **/
-    public static String getName(){
+    public static String getName() {
         HttpServletRequest request = getHttpServletRequest();
-        if(StringUtils.isBlank(request.getHeader(HeaderEnum.NAME.getKey())) ){
+        if (StringUtils.isBlank(request.getHeader(HeaderEnum.NAME.getKey()))) {
             return null;
         }
         return request.getHeader(HeaderEnum.NAME.getKey());
@@ -181,11 +190,12 @@ public class HttpTool {
 
     /**
      * 获取请求头信息
+     *
      * @author: bird
      * @date: 2022-4-20 14:06
      * @return: IP
      **/
-    public static String getIp4(HttpServletRequest request){
+    public static String getIp4(HttpServletRequest request) {
         String ipAddress = null;
         try {
             ipAddress = request.getHeader("x-forwarded-for");
@@ -203,7 +213,7 @@ public class HttpTool {
                     try {
                         inet = InetAddress.getLocalHost();
                     } catch (UnknownHostException e) {
-                        log.warn("get ip ERROR: {}" ,e.getMessage());
+                        log.warn("get ip ERROR: {}", e.getMessage());
                     }
                     ipAddress = inet.getHostAddress();
                 }
@@ -219,18 +229,19 @@ public class HttpTool {
         } catch (Exception e) {
             ipAddress = "0.0.0.0";
         }
-        return ipAddress;
+        return "0:0:0:0:0:0:0:1".equals(ipAddress) ? "127.0.0.1" : ipAddress;
     }
 
 
     /**
      * 获取请求方信息
+     *
      * @author: birdbro
      * @date: 2022-4-22
      * @param:
      * @return:
      **/
-    public static HttpRequestInfo getRequestInfo(HttpServletRequest request){
+    public static HttpRequestInfo getRequestInfo(HttpServletRequest request) {
 
         String ip4 = getIp4(request);
         String agent = request.getHeader("User-Agent");
@@ -250,6 +261,7 @@ public class HttpTool {
 
     /**
      * 获取请求方 入参
+     *
      * @author: bird
      * @date: 2022-4-7 11:08
      * @param:
@@ -262,7 +274,6 @@ public class HttpTool {
         }
         return rtnMap;
     }
-
 
 
     public static Map<String, String> converMap(Map<String, String[]> paramMap) {
