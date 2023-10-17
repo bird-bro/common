@@ -10,13 +10,15 @@ import java.util.Random;
 
 /**
  * 头像生成工具
+ *
  * @author birdbro
  * @date 9:42 2022-12-7
  **/
-public class HeadIconTool {
+public class IconTool {
 
     /**
      * 图片做圆角处理
+     *
      * @author:bird
      * @date: 2021-7-21 11:41
      * @param: BufferedImage image
@@ -41,13 +43,14 @@ public class HeadIconTool {
 
     /**
      * 随机背景色
+     *
      * @author:bird
      * @date: 2021-7-21 11:40
      * @return: Color
      **/
     public static Color getRandomColor() {
         String[] beautifulColors =
-                new String[]{"52,145,250","20,201,201","90,170,251","63,212,207"};
+                new String[]{"52,145,250", "20,201,201", "90,170,251", "63,212,207"};
         int len = beautifulColors.length;
         Random random = new Random();
         String[] color = beautifulColors[random.nextInt(len)].split(",");
@@ -56,18 +59,19 @@ public class HeadIconTool {
     }
 
 
-    public static String fileType(String fileName){
+    public static String fileType(String fileName) {
         return fileName.contains(".") ? fileName.substring(fileName.lastIndexOf("."), fileName.length()) : null;
     }
 
     /**
-     * 头像
+     * 生成ICON头像
+     *
      * @author: bird
      * @date: 2022-4-18 13:43
      * @param:
      * @return:
      **/
-    public static String headIcon(String name,String outputPath, String outputName, String baseDir, String baseUrl)
+    public static String generate(String name, String homePath, String filePath, String fileName)
             throws IOException {
 
         int width = 200;
@@ -79,22 +83,21 @@ public class HeadIconTool {
         if (nameLen <= 3 && CharsTool.isChinese(first)) {
             nameWritten = name;
         } else {
-            nameWritten = name.substring(0,1);
+            nameWritten = name.substring(0, 1);
         }
         //文件存储路径
-        String pathName = outputPath + File.separator + outputName + ".png";
-        String filename = baseDir + pathName;
-        File file = new File(filename);
+        String fileDir = filePath + File.separator + fileName + ".png";
+        File file = new File(homePath + fileDir);
 
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = (Graphics2D) bi.getGraphics();
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setBackground(HeadIconTool.getRandomColor());
+        g2.setBackground(IconTool.getRandomColor());
         g2.clearRect(0, 0, width, height);
         g2.setPaint(Color.WHITE);
         Font font = null;
-        switch (nameWritten.length()){
+        switch (nameWritten.length()) {
             case 3:
                 font = new Font("微软雅黑", Font.PLAIN, 60);
                 g2.setFont(font);
@@ -107,7 +110,7 @@ public class HeadIconTool {
                 break;
             case 1:
                 //中文
-                if(CharsTool.isChinese(nameWritten)) {
+                if (CharsTool.isChinese(nameWritten)) {
                     font = new Font("微软雅黑", Font.PLAIN, 130);
                     g2.setFont(font);
                     g2.drawString(nameWritten, 35, 140);
@@ -126,8 +129,8 @@ public class HeadIconTool {
                 break;
         }
 
-        BufferedImage rounded = HeadIconTool.makeRoundedCorner(bi, 99);
+        BufferedImage rounded = IconTool.makeRoundedCorner(bi, 99);
         ImageIO.write(rounded, "png", file);
-        return  pathName;
+        return fileDir;
     }
 }

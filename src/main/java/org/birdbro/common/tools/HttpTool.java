@@ -1,7 +1,6 @@
 package org.birdbro.common.tools;
 
-import cn.hutool.http.useragent.UserAgent;
-import cn.hutool.http.useragent.UserAgentUtil;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
@@ -9,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.birdbro.common.entity.CookieVariable;
-import org.birdbro.common.entity.HttpRequestInfo;
 import org.birdbro.common.enums.ExceptionEnum;
 import org.birdbro.common.enums.HeaderEnum;
 import org.birdbro.common.exception.BusinessException;
@@ -241,22 +239,22 @@ public class HttpTool {
      * @param:
      * @return:
      **/
-    public static HttpRequestInfo getRequestInfo(HttpServletRequest request) {
-
-        String ip4 = getIp4(request);
-        String agent = request.getHeader("User-Agent");
-        String session = request.getSession().getId();
-        UserAgent ags = UserAgentUtil.parse(agent);
-
-        return HttpRequestInfo.builder()
-                .session(session)
-                .ip4(ip4)
-                .browser(ags.getBrowser() + " " + ags.getVersion())
-                .engine(ags.getEngine() + " " + ags.getEngineVersion())
-                .os(ags.getOs().toString())
-                .mobile(ags.isMobile())
-                .build();
-    }
+//    public static HttpRequestInfo getRequestInfo(HttpServletRequest request) {
+//
+//        String ip4 = getIp4(request);
+//        String agent = request.getHeader("User-Agent");
+//        String session = request.getSession().getId();
+//        UserAgent ags = UserAgentUtil.parse(agent);
+//
+//        return HttpRequestInfo.builder()
+//                .session(session)
+//                .ip4(ip4)
+//                .browser(ags.getBrowser() + " " + ags.getVersion())
+//                .engine(ags.getEngine() + " " + ags.getEngineVersion())
+//                .os(ags.getOs().toString())
+//                .mobile(ags.isMobile())
+//                .build();
+//    }
 
 
     /**
